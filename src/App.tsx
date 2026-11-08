@@ -994,7 +994,7 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
     { name: 'Orderii', logo: '/logos/orderii.png' },
     { name: 'Hyundai', logo: '/logos/hyundai.png' },
     { name: 'ABS', logo: '/logos/abs.png' },
-    { name: 'Ameena', logo: '/logos/ameena.png' },
+    { name: 'Ameena', logo: '/logos/ameena.jpg' },
   ];
 
   const galleryImages = [
