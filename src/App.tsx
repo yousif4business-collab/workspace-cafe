@@ -986,20 +986,20 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } &
   ];
 
   const clients = [
-    { name: 'Uber', logo: 'https://logo.clearbit.com/uber.com' },
-    { name: 'Careem', logo: 'https://logo.clearbit.com/careem.com' },
-    { name: 'Hyundai', logo: 'https://logo.clearbit.com/hyundai.com' },
-    { name: 'Zain', logo: 'https://logo.clearbit.com/zain.com' },
-    { name: 'Asiacell', logo: 'https://logo.clearbit.com/asiacell.com' },
-    { name: 'Korek', logo: 'https://logo.clearbit.com/korek.com' },
-    { name: 'Fastlink', logo: 'https://logo.clearbit.com/fastlink.com' },
+    { name: 'Uber', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/58/Uber_logo_2018.svg' },
+    { name: 'Careem', logo: 'https://cdn.worldvectorlogo.com/logos/careem.svg' },
+    { name: 'Hyundai', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Hyundai_Motor_Company_logo.svg' },
+    { name: 'Zain', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Zain_logo.svg' },
+    { name: 'Asiacell', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Asiacell_logo.svg' },
+    { name: 'Korek', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Korek_logo.svg' },
+    { name: 'Fastlink', logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6e/Fastlink_logo.svg' },
     { name: 'Miswag', logo: 'https://logo.clearbit.com/miswag.com' },
   ];
 
   const galleryImages = [
     { src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80', label: lang === 'en' ? 'Building Exterior' : 'المبنى من الخارج' },
-    { src: encodeURI(IMAGES.padelRooftop), label: 'Rooftop Padel Court' },
-    { src: encodeURI(IMAGES.meetingRoom), label: 'Executive Boardroom' },
+    { src: encodeURI(IMAGES.padelRooftop), label: lang === 'en' ? 'Rooftop Padel Court' : 'ملعب البادل على السطح' },
+    { src: encodeURI(IMAGES.meetingRoom), label: lang === 'en' ? 'Executive Boardroom' : 'قاعة الاجتماعات التنفيذية' },
   ];
 
   return (
@@ -1048,7 +1048,22 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } &
           <div className="animate-marquee items-center">
             {[...clients, ...clients].map((client, i) => (
               <div key={i} className="mx-4 sm:mx-6 flex-shrink-0 w-32 md:w-40 h-20 bg-white rounded-2xl flex items-center justify-center p-4 shadow-sm border border-white/10 cursor-pointer group">
-                <img src={client.logo} alt={client.name} className="w-full h-full object-contain filter grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="w-full h-full object-contain filter grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                  onError={(e) => {
+                    const image = e.currentTarget;
+                    image.style.display = 'none';
+                    const parent = image.parentElement;
+                    if (parent && !parent.querySelector('.fallback-text')) {
+                      const span = document.createElement('span');
+                      span.className = 'fallback-text text-stone-900 font-bold text-sm tracking-wider uppercase';
+                      span.innerText = client.name;
+                      parent.appendChild(span);
+                    }
+                  }}
+                />
               </div>
             ))}
           </div>
@@ -1141,8 +1156,12 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } &
         {/* Building Gallery */}
         <div className="mb-16 animate-fade-in-up delay-100">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-serif font-black text-white">{t.officeGallery}</h2>
-            <p className="text-sm text-stone-400 mt-2">Premium architecture, professional interiors, and a workspace environment designed for serious businesses.</p>
+            <h2 className="text-3xl md:text-4xl font-serif font-black text-white">{lang === 'en' ? 'See WorkSpace in Detail.' : 'شاهد وورك سبيس بالتفصيل.'}</h2>
+            <p className="text-sm text-stone-400 mt-2">
+              {lang === 'en'
+                ? 'Premium architecture, professional interiors, and a workspace environment designed for serious businesses.'
+                : 'هندسة معمارية متميزة، تصاميم داخلية احترافية، وبيئة عمل مصممة للشركات الجادة.'}
+            </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {galleryImages.map((img, i) => (
