@@ -200,12 +200,12 @@ const GlobalStyles = () => (
     @keyframes slide-in-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
     @keyframes scroll {
       0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      100% { transform: translateX(-33.3333%); }
     }
     .animate-marquee {
       display: flex;
       width: max-content;
-      animation: scroll 35s linear infinite;
+      animation: scroll 45s linear infinite;
     }
     .animate-marquee:hover { animation-play-state: paused; }
 
@@ -1054,25 +1054,33 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
         </section>
 
         {/* Client Marquee */}
-        <section className="py-12 bg-[#12100F] border-b border-white/5 overflow-hidden relative">
-          <p className="text-center text-[10px] font-bold tracking-[0.2em] uppercase text-stone-500 mb-8">
+        <section className="py-16 bg-[#12100F] border-b border-white/5 overflow-hidden relative">
+          <p className="text-center text-[10px] font-bold tracking-[0.2em] uppercase text-stone-500 mb-10">
             Trusted by Leading Companies
           </p>
-          <div className="absolute top-0 bottom-0 left-0 w-24 md:w-48 bg-gradient-to-r from-[#12100F] to-transparent z-10 pointer-events-none" />
-          <div className="absolute top-0 bottom-0 right-0 w-24 md:w-48 bg-gradient-to-l from-[#12100F] to-transparent z-10 pointer-events-none" />
-          <div className="animate-marquee items-center">
-            {[...clients, ...clients].map((client, i) => (
-              <div key={i} className="mx-4 sm:mx-6 flex-shrink-0 w-32 md:w-40 h-20 bg-white rounded-2xl flex items-center justify-center p-4 shadow-sm border border-white/10 cursor-pointer group">
-                <img 
-                  src={client.logo} 
-                  alt={client.name} 
-                  className="w-full h-full object-contain filter grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 p-2"
+
+          {/* Fading Edges */}
+          <div className="absolute top-0 bottom-0 left-0 w-24 md:w-64 bg-gradient-to-r from-[#12100F] to-transparent z-10 pointer-events-none" />
+          <div className="absolute top-0 bottom-0 right-0 w-24 md:w-64 bg-gradient-to-l from-[#12100F] to-transparent z-10 pointer-events-none" />
+
+          {/* The Moving Belt */}
+          <div className="flex w-max animate-marquee items-center">
+            {/* Tripled for a perfect infinite loop */}
+            {[...clients, ...clients, ...clients].map((client, i) => (
+              <div
+                key={i}
+                className="mx-6 md:mx-10 flex-shrink-0 w-24 md:w-32 h-16 flex items-center justify-center cursor-pointer group"
+              >
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="w-full h-full object-contain filter invert grayscale opacity-40 mix-blend-screen group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
                     const parent = (e.target as HTMLImageElement).parentElement;
                     if (parent && !parent.querySelector('.fallback-text')) {
                       const span = document.createElement('span');
-                      span.className = 'fallback-text text-stone-900 font-bold text-sm tracking-wider uppercase';
+                      span.className = 'fallback-text text-stone-500 font-bold text-sm tracking-wider uppercase group-hover:text-white transition-colors';
                       span.innerText = client.name;
                       parent.appendChild(span);
                     }
