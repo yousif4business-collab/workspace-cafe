@@ -29,20 +29,38 @@ const IMAGES = {
 
 const TRANSLATIONS = {
   en: {
-    wifi: 'High-Speed Wi-Fi', electricity: '24/7 Electricity', restrooms: 'Premium Restrooms', security: '24/7 Security',
-    hours: 'Opening Hours', location: 'Location', directLine: 'Direct Line',
+    heroTitle1: 'SPECIALTY CAFE', heroTitle2: 'PADEL CLUB', heroTitle3: '6TH FL. SUITE', heroTitle4: 'BUSINESS SUITES',
+    heroDesc1: 'Specialty Spanish lattes, layered matchas, and fresh bakery treats.', heroDesc2: 'Play high above the city on Baghdad’s premier rooftop padel court.', heroDesc3: 'Quiet 6th-floor boardroom with 4K smart display and barista catering.', heroDesc4: 'Private offices, serviced suites, and enterprise floors in the heart of Baghdad.',
+    enterMenu: 'ENTER MENU', bookCourt: 'BOOK COURT', reserveSuite: 'RESERVE SUITE', exploreOffices: 'EXPLORE OFFICES',
+    menuTitle: 'The WorkSpace Menu', menuDesc: 'Crafted with Colombian, Ethiopian, and Brazilian micro-lots. Every iced sip is served in our signature printed tumbler.',
+    catAll: 'Full Menu', catHot: 'Hot Drinks', catIced: 'Iced Drinks', catMojitos: 'Mojitos', catTea: 'Iced Tea', catSmoothies: 'Smoothies', catBakery: 'Bakery & Sweets',
+    add: 'ADD', order: 'ORDER', cartEmpty: 'Your bag is currently empty.', checkout: 'ORDER VIA WHATSAPP',
     bookPadel: 'Book Your Padel Court', bookMeeting: 'Reserve 6th Floor Boardroom',
-    confirmWA: 'CONFIRM ON WHATSAPP', addCalendar: 'Add Slot to Google Calendar',
-    total: 'Grand Total', order: 'ORDER', menu: 'Full Menu'
+    selectDate: 'Select Date & Time', selectDay: '1. Select Day', selectSlot: '2. Select Start Slot', duration: '3. Duration', addOns: 'Optional Add-Ons',
+    namePlace: 'Your Full Name *', phonePlace: 'Phone Number (e.g., 0770 000 0000)', confirmWA: 'CONFIRM ON WHATSAPP', addCalendar: 'Add Slot to Google Calendar', total: 'Grand Total', hours: 'Opening Hours', hour: 'Hour',
+    wifi: 'High-Speed Wi-Fi', electricity: '24/7 Electricity', restrooms: 'Premium Restrooms', security: '24/7 Security', location: 'Location', directLine: 'Direct Line',
+    officeHero: 'Built for Serious Business At Every Scale.', officeHeroDesc: 'From a single desk to an entire corporate floor. WorkSpace provides the environment, address, and infrastructure your business needs to thrive in Baghdad.',
+    officeClients: 'Trusted by Leading Companies', officeGallery: 'See WorkSpace in Detail.',
+    solPrivate: 'Private Offices', solPrivateD: 'Dedicated, locked suites for teams that need privacy and focus.', solServiced: 'Serviced Offices', solServicedD: 'Fully managed, move-in ready with admin and IT support.', solEnterprise: 'Enterprise Suites', solEnterpriseD: 'Entire floors and bespoke configurations for large teams.', solVirtual: 'Virtual Offices', solVirtualD: 'A prestigious Baghdad address without the physical space.', solMeeting: 'Meeting Rooms', solMeetingD: 'Fully equipped rooms available on demand.', solCustom: 'Custom Solutions', solCustomD: 'Unserviced raw space for tenants who want full control.',
+    startingFrom: 'Starting From', customPricing: 'Custom Pricing', readyTitle: 'Ready to find your workspace?', readyDesc: 'Schedule a site visit or speak directly with our enterprise team.', menu: 'Full Menu'
   },
   ar: {
-    wifi: 'واي فاي سريع', electricity: 'كهرباء 24/7', restrooms: 'حمامات فاخرة', security: 'أمن 24/7',
-    hours: 'ساعات العمل', location: 'الموقع', directLine: 'الخط المباشر',
+    heroTitle1: 'المقهى المختص', heroTitle2: 'ملعب البادل', heroTitle3: 'قاعة الطابق السادس', heroTitle4: 'أجنحة الأعمال',
+    heroDesc1: 'لاتيه إسباني مختص، ماتشا متعددة الطبقات، ومخبوزات طازجة.', heroDesc2: 'العب فوق مدينة بغداد في أول ملعب بادل على السطح.', heroDesc3: 'قاعة اجتماعات هادئة في الطابق السادس مع شاشة 4K وخدمة تقديم القهوة.', heroDesc4: 'مكاتب خاصة، أجنحة مخدومة، وطوابق للشركات في قلب بغداد.',
+    enterMenu: 'دخول القائمة', bookCourt: 'احجز الملعب', reserveSuite: 'احجز القاعة', exploreOffices: 'استكشف المكاتب',
+    menuTitle: 'قائمة وورك سبيس', menuDesc: 'مصنوعة من محاصيل كولومبية وإثيوبية وبرازيلية. كل رشفة مثلجة تقدم في كوبنا المميز.',
+    catAll: 'القائمة الكاملة', catHot: 'مشروبات ساخنة', catIced: 'مشروبات مثلجة', catMojitos: 'موهيتو', catTea: 'شاي مثلج', catSmoothies: 'سموذي', catBakery: 'مخبوزات وحلويات',
+    add: 'أضف', order: 'اطلب', cartEmpty: 'حقيبتك فارغة حالياً.', checkout: 'اطلب عبر واتساب',
     bookPadel: 'احجز ملعب البادل', bookMeeting: 'احجز قاعة الاجتماعات',
-    confirmWA: 'تأكيد عبر واتساب', addCalendar: 'إضافة إلى تقويم جوجل',
-    total: 'المجموع الكلي', order: 'اطلب', menu: 'القائمة الكاملة'
+    selectDate: 'اختر التاريخ والوقت', selectDay: '1. اختر اليوم', selectSlot: '2. اختر وقت البدء', duration: '3. المدة', addOns: 'إضافات اختيارية',
+    namePlace: 'اسمك الكامل *', phonePlace: 'رقم الهاتف (مثال: 0770 000 0000)', confirmWA: 'تأكيد عبر واتساب', addCalendar: 'إضافة إلى تقويم جوجل', total: 'المجموع الكلي', hours: 'ساعات العمل', hour: 'ساعة',
+    wifi: 'واي فاي سريع', electricity: 'كهرباء 24/7', restrooms: 'حمامات فاخرة', security: 'أمن 24/7', location: 'الموقع', directLine: 'الخط المباشر',
+    officeHero: 'مبني للأعمال الجادة على كل المستويات.', officeHeroDesc: 'من مكتب واحد إلى طابق كامل. وورك سبيس يوفر البيئة والعنوان والبنية التحتية التي يحتاجها عملك للازدهار في بغداد.',
+    officeClients: 'موثوق به من قبل الشركات الرائدة', officeGallery: 'شاهد وورك سبيس بالتفصيل.',
+    solPrivate: 'مكاتب خاصة', solPrivateD: 'أجنحة مخصصة ومقفلة للفرق التي تحتاج إلى الخصوصية والتركيز.', solServiced: 'مكاتب مخدومة', solServicedD: 'إدارة كاملة، جاهزة للانتقال مع دعم إداري وتقني.', solEnterprise: 'أجنحة الشركات', solEnterpriseD: 'طوابق كاملة وتكوينات مخصصة للفرق الكبيرة.', solVirtual: 'مكاتب افتراضية', solVirtualD: 'عنوان مرموق في بغداد دون الحاجة لمساحة مادية.', solMeeting: 'قاعات الاجتماعات', solMeetingD: 'غرف مجهزة بالكامل متاحة عند الطلب.', solCustom: 'حلول مخصصة', solCustomD: 'مساحة خام غير مخدومة للمستأجرين الذين يريدون السيطرة الكاملة.',
+    startingFrom: 'يبدأ من', customPricing: 'تسعير مخصص', readyTitle: 'هل أنت مستعد للعثور على مساحة عملك؟', readyDesc: 'حدد موعداً لزيارة الموقع أو تحدث مباشرة مع فريق المؤسسات لدينا.', menu: 'القائمة الكاملة'
   }
-};
+}
 
 type Language = keyof typeof TRANSLATIONS;
 type LanguageProps = { lang: Language; setLang: (lang: Language) => void; };
@@ -378,20 +396,21 @@ const MENU_ITEMS: MenuItem[] = [
 // ─────────────────────────────────────────────────────────────
 const GatewayPage = ({ onSelectWorld, lang, setLang }: { onSelectWorld: (id: WorldId) => void } & LanguageProps) => {
   const [hoveredPanel, setHoveredPanel] = useState<WorldId | null>(null);
+  const t = TRANSLATIONS[lang];
 
   const worlds: World[] = [
-    { id: 'menu', code: '01', title: 'SPECIALTY CAFE', tagline: 'Specialty Beans & 16oz Cups', badge: 'QR & SPECIALTY MENU', cta: 'ENTER MENU', image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=85', desc: 'Specialty Spanish lattes, layered matchas, and fresh bakery treats served in signature cups.' },
-    { id: 'padel', code: '02', title: 'PADEL CLUB', tagline: 'Open-Air Rooftop Turf', badge: '60,000 IQD / HOUR', cta: 'BOOK COURT', image: encodeURI(IMAGES.padelRooftop), desc: "Play high above the city on Baghdad's premier rooftop terracotta padel court." },
-    { id: 'meeting', code: '03', title: '6TH FL. SUITE', tagline: 'Inside The WorkSpace', badge: '25,000 IQD / HOUR', cta: 'RESERVE SUITE', image: encodeURI(IMAGES.meetingRoom), desc: 'Quiet 6th-floor boardroom with 4K smart display, ergonomic seating, and direct barista catering.' },
+    { id: 'menu', code: '01', title: t.heroTitle1, tagline: lang === 'en' ? 'Specialty Beans & 16oz Cups' : 'حبوب مختصة وأكواب 16 أونصة', badge: 'QR & SPECIALTY MENU', cta: t.enterMenu, image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=85', desc: t.heroDesc1 },
+    { id: 'padel', code: '02', title: t.heroTitle2, tagline: lang === 'en' ? 'Open-Air Rooftop Turf' : 'ملعب سطح مفتوح', badge: '60,000 IQD / HOUR', cta: t.bookCourt, image: encodeURI(IMAGES.padelRooftop), desc: t.heroDesc2 },
+    { id: 'meeting', code: '03', title: t.heroTitle3, tagline: lang === 'en' ? 'Inside The WorkSpace' : 'داخل وورك سبيس', badge: '25,000 IQD / HOUR', cta: t.reserveSuite, image: encodeURI(IMAGES.meetingRoom), desc: t.heroDesc3 },
     {
       id: 'office',
       code: '04',
-      title: 'BUSINESS SUITES',
-      tagline: 'Premium Office Solutions',
-      badge: 'FROM 1 DESK TO FULL FLOOR',
-      cta: 'EXPLORE OFFICES',
+      title: t.heroTitle4,
+      tagline: lang === 'en' ? 'Premium Office Solutions' : 'حلول مكاتب فاخرة',
+      badge: lang === 'en' ? 'FROM 1 DESK TO FULL FLOOR' : 'من مكتب واحد إلى الطابق الكامل',
+      cta: t.exploreOffices,
       image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=85',
-      desc: 'Private offices, serviced suites, and enterprise floors in the heart of Baghdad. Scale your business with premium infrastructure.'
+      desc: t.heroDesc4
     }
   ];
 
@@ -477,9 +496,10 @@ type MenuPageProps = {
   cart: CartItem[];
   onAddToCart: (item: MenuItem, qty?: number) => void;
   onOpenCart: () => void;
-};
+} & LanguageProps;
 
-const MenuPage = ({ onBack, onNavigateReservation, cart, onAddToCart, onOpenCart }: MenuPageProps) => {
+const MenuPage = ({ onBack, onNavigateReservation, cart, onAddToCart, onOpenCart, lang, setLang }: MenuPageProps) => {
+  const t = TRANSLATIONS[lang];
   const [selectedCat, setSelectedCat] = useState<string>('all');
   const [cupFilter, setCupFilter] = useState<'all' | 'paper' | 'iced'>('all');
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
@@ -514,8 +534,9 @@ const MenuPage = ({ onBack, onNavigateReservation, cart, onAddToCart, onOpenCart
         <div className="flex items-center space-x-2 md:space-x-3">
           <button onClick={() => onNavigateReservation('padel')} className="hidden sm:flex items-center space-x-1.5 px-4 py-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-xs font-semibold text-stone-300"><span>🎾 Padel Court</span></button>
           <button onClick={() => onNavigateReservation('meeting')} className="hidden sm:flex items-center space-x-1.5 px-4 py-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-xs font-semibold text-stone-300"><span>💼 6th Fl. Room</span></button>
+          <button onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} className="px-3 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold">{lang === 'en' ? 'العربية' : 'English'}</button>
           <button onClick={onOpenCart} aria-label={`Open cart (${cartTotalCount} items)`} className="relative px-4 py-2 rounded-full bg-[#C85228] hover:bg-[#d95d31] text-white text-xs font-bold tracking-wider flex items-center space-x-2 shadow-lg">
-            <ShoppingBag size={15} /><span>ORDER</span>
+            <ShoppingBag size={15} /><span>{t.order}</span>
             {cartTotalCount > 0 && <span className="w-5 h-5 rounded-full bg-white text-stone-900 font-bold flex items-center justify-center text-[10px]">{cartTotalCount}</span>}
           </button>
         </div>
@@ -524,8 +545,8 @@ const MenuPage = ({ onBack, onNavigateReservation, cart, onAddToCart, onOpenCart
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-12 py-8">
         <div className="text-center max-w-2xl mx-auto mb-8">
           <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#C85228]">BAGHDAD SPECIALTY BAR & BAKERY</span>
-          <h1 className="text-3xl md:text-5xl font-serif font-black text-white mt-1 mb-3">The WorkSpace Menu</h1>
-          <p className="text-xs md:text-sm text-stone-300 font-light leading-relaxed">Crafted with Colombian, Ethiopian, and Brazilian micro-lots. Every iced sip is served in our signature printed tumbler; hot coffees in our bean-patterned paper cup.</p>
+          <h1 className="text-3xl md:text-5xl font-serif font-black text-white mt-1 mb-3">{t.menuTitle}</h1>
+          <p className="text-xs md:text-sm text-stone-300 font-light leading-relaxed">{t.menuDesc}</p>
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-2 my-6">
@@ -540,7 +561,7 @@ const MenuPage = ({ onBack, onNavigateReservation, cart, onAddToCart, onOpenCart
             const isSelected = selectedCat === cat.id;
             return (
               <button key={cat.id} onClick={() => setSelectedCat(cat.id)} className={`px-4 py-2 rounded-xl text-xs font-bold tracking-wide flex items-center space-x-2 whitespace-nowrap transition-all shrink-0 ${isSelected ? 'bg-[#FAF7F2] text-stone-900 shadow-md' : 'bg-white/5 text-stone-300 hover:bg-white/10'}`}>
-                <Icon size={14} className={isSelected ? 'text-[#C85228]' : 'text-stone-400'} /><span>{cat.name}</span>
+                <Icon size={14} className={isSelected ? 'text-[#C85228]' : 'text-stone-400'} /><span>{({ all: t.catAll, hot: t.catHot, iced: t.catIced, mojitos: t.catMojitos, icedtea: t.catTea, smoothies: t.catSmoothies, bakery: t.catBakery } as Record<string, string>)[cat.id] ?? cat.name}</span>
               </button>
             );
           })}
@@ -916,13 +937,14 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onBrowse }: CartD
 // OFFICE SOLUTIONS
 // ─────────────────────────────────────────────────────────────
 const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } & LanguageProps) => {
+  const t = TRANSLATIONS[lang];
   const solutions = [
-    { icon: Building2, title: 'Private Offices', desc: 'Dedicated, locked suites for teams that need privacy and focus.', price: '1,500,000 IQD', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80' },
-    { icon: Briefcase, title: 'Serviced Offices', desc: 'Fully managed, move-in ready with admin and IT support.', price: '2,000,000 IQD', image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80' },
-    { icon: Users, title: 'Enterprise Suites', desc: 'Entire floors and bespoke configurations for large teams.', price: 'Custom Pricing', image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80' },
-    { icon: Globe, title: 'Virtual Offices', desc: 'A prestigious Baghdad address without the physical space.', price: '250,000 IQD', image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80' },
-    { icon: Layout, title: 'Meeting Rooms', desc: 'Fully equipped rooms available on demand.', price: '50,000 IQD', image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80' },
-    { icon: Wrench, title: 'Custom Solutions', desc: 'Unserviced raw space for tenants who want full control.', price: 'Custom Pricing', image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80' },
+    { icon: Building2, title: t.solPrivate, desc: t.solPrivateD, price: '1,500,000 IQD', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80' },
+    { icon: Briefcase, title: t.solServiced, desc: t.solServicedD, price: '2,000,000 IQD', image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80' },
+    { icon: Users, title: t.solEnterprise, desc: t.solEnterpriseD, price: t.customPricing, image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80' },
+    { icon: Globe, title: t.solVirtual, desc: t.solVirtualD, price: '250,000 IQD', image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80' },
+    { icon: Layout, title: t.solMeeting, desc: t.solMeetingD, price: '50,000 IQD', image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80' },
+    { icon: Wrench, title: t.solCustom, desc: t.solCustomD, price: t.customPricing, image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80' },
   ];
 
   const amenities = [
@@ -937,18 +959,18 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } &
   ];
 
   const clients = [
-    { name: 'Uber', logo: 'https://workspaceiq.replit.app/logo-uber.svg' },
-    { name: 'Careem', logo: 'https://workspaceiq.replit.app/logo-careem.jpg' },
-    { name: 'Al Majal', logo: 'https://workspaceiq.replit.app/logo-almajal.jpg' },
-    { name: 'Abwaab', logo: 'https://workspaceiq.replit.app/logo-abwaab.jpg' },
-    { name: 'ABS', logo: 'https://workspaceiq.replit.app/logo-abs.jpg' },
-    { name: 'Hyundai', logo: 'https://workspaceiq.replit.app/logo-hyundai.jpg' },
-    { name: 'Orderii', logo: 'https://workspaceiq.replit.app/logo-orderii.jpg' },
-    { name: 'Ameena', logo: 'https://workspaceiq.replit.app/logo-ameena.jpg' },
+    { name: 'Uber', logo: 'https://logo.clearbit.com/uber.com' },
+    { name: 'Careem', logo: 'https://logo.clearbit.com/careem.com' },
+    { name: 'Hyundai', logo: 'https://logo.clearbit.com/hyundai.com' },
+    { name: 'Zain', logo: 'https://logo.clearbit.com/zain.com' },
+    { name: 'Asiacell', logo: 'https://logo.clearbit.com/asiacell.com' },
+    { name: 'Korek', logo: 'https://logo.clearbit.com/korek.com' },
+    { name: 'Fastlink', logo: 'https://logo.clearbit.com/fastlink.com' },
+    { name: 'Miswag', logo: 'https://logo.clearbit.com/miswag.com' },
   ];
 
   const galleryImages = [
-    { src: 'https://workspaceiq.replit.app/building-exterior.jpg', label: 'Building Exterior' },
+    { src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80', label: lang === 'en' ? 'Building Exterior' : 'المبنى من الخارج' },
     { src: encodeURI(IMAGES.padelRooftop), label: 'Rooftop Padel Court' },
     { src: encodeURI(IMAGES.meetingRoom), label: 'Executive Boardroom' },
   ];
@@ -985,20 +1007,13 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } &
           <span className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold tracking-[0.2em] uppercase text-[#E59866] mb-4">
             WORKSPACE IQ
           </span>
-          <h1 className="text-4xl md:text-6xl font-serif font-black text-white mt-2 mb-6 leading-[1.1]">
-            Built for Serious Business <br />
-            <span className="text-[#C85228] italic">At Every Scale.</span>
-          </h1>
-          <p className="text-sm md:text-base text-stone-400 font-light leading-relaxed max-w-xl mx-auto">
-            From a single desk to an entire corporate floor. WorkSpace provides the environment, address, and infrastructure your business needs to thrive in Baghdad.
-          </p>
+          <h1 className="text-4xl md:text-6xl font-serif font-black text-white mt-2 mb-6 leading-[1.1]">{t.officeHero}</h1>
+          <p className="text-sm md:text-base text-stone-400 font-light leading-relaxed max-w-xl mx-auto">{t.officeHeroDesc}</p>
         </div>
 
         {/* Trusted Clients Strip */}
         <div className="mb-16 animate-fade-in-up">
-          <p className="text-center text-[10px] font-bold tracking-[0.2em] uppercase text-stone-400 mb-6">
-            Trusted by Leading Companies
-          </p>
+          <p className="text-center text-[10px] font-bold tracking-[0.2em] uppercase text-stone-400 mb-6">{t.officeClients}</p>
           <div className="grid grid-cols-4 sm:grid-cols-8 gap-3 items-center">
             {clients.map((client, i) => (
               <div key={i} className="bg-white rounded-xl flex items-center justify-center aspect-[3/2] overflow-hidden p-2 sm:p-3 shadow-sm hover:shadow-md transition-shadow">
@@ -1037,7 +1052,7 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } &
                   {/* Fixed Footer Row */}
                   <div className="flex items-center justify-between pt-4 border-t border-white/20">
                     <div className="flex flex-col">
-                      <span className="text-[9px] uppercase tracking-widest text-stone-400 mb-0.5">Starting From</span>
+                      <span className="text-[9px] uppercase tracking-widest text-stone-400 mb-0.5">{t.startingFrom}</span>
                       <span className="text-sm font-mono font-bold text-[#C85228]">{sol.price}</span>
                     </div>
                     <button className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:bg-[#C85228] group-hover:border-[#C85228] transition-all duration-300">
@@ -1078,8 +1093,8 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } &
 
         {/* CTA */}
         <div className="text-center max-w-xl mx-auto pb-12 animate-fade-in-up delay-200">
-          <h3 className="text-3xl font-serif font-black text-white mb-4">Ready to find your workspace?</h3>
-          <p className="text-sm text-stone-400 mb-8">Schedule a site visit or speak directly with our enterprise team.</p>
+          <h3 className="text-3xl font-serif font-black text-white mb-4">{t.readyTitle}</h3>
+          <p className="text-sm text-stone-400 mb-8">{t.readyDesc}</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('I would like to arrange a site visit for WorkSpace Business Suites.')}`} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-stone-950 font-bold text-xs tracking-wider uppercase transition-all shadow-xl flex items-center justify-center space-x-2">
               <MessageCircle size={18} />
@@ -1095,7 +1110,7 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } &
         {/* Building Gallery */}
         <div className="mb-16 animate-fade-in-up delay-100">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-serif font-black text-white">See WorkSpace in Detail.</h2>
+            <h2 className="text-3xl md:text-4xl font-serif font-black text-white">{t.officeGallery}</h2>
             <p className="text-sm text-stone-400 mt-2">Premium architecture, professional interiors, and a workspace environment designed for serious businesses.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1159,7 +1174,7 @@ export default function App() {
     <div dir={lang === 'ar' ? 'rtl' : 'ltr'} className="min-h-screen bg-[#12100F] font-sans text-stone-100 selection:bg-[#C85228] selection:text-white">
       <GlobalStyles />
       {currentPage === 'home' && <GatewayPage onSelectWorld={(id) => setCurrentPage(id)} lang={lang} setLang={setLang} />}
-      {currentPage === 'menu' && <MenuPage onBack={() => setCurrentPage('home')} onNavigateReservation={(type) => setCurrentPage(type)} cart={cart} onAddToCart={handleAddToCart} onOpenCart={() => setIsCartOpen(true)} />}
+      {currentPage === 'menu' && <MenuPage onBack={() => setCurrentPage('home')} onNavigateReservation={(type) => setCurrentPage(type)} cart={cart} onAddToCart={handleAddToCart} onOpenCart={() => setIsCartOpen(true)} lang={lang} setLang={setLang} />}
       {(currentPage === 'padel' || currentPage === 'meeting') && <ReservationPage type={currentPage} onBack={() => setCurrentPage('home')} lang={lang} setLang={setLang} />}
       {currentPage === 'office' && <OfficeSolutionsPage onBack={() => setCurrentPage('home')} lang={lang} setLang={setLang} />}
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cart={cart} onUpdateQuantity={handleUpdateQuantity} onBrowse={() => setCurrentPage('menu')} />
