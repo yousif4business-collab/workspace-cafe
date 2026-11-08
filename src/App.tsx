@@ -446,7 +446,7 @@ const GatewayPage = ({ onSelectWorld, lang, setLang }: { onSelectWorld: (id: Wor
               role="button"
               tabIndex={0}
               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelectWorld(world.id); } }}
-              className={`relative flex-1 cursor-pointer transition-all duration-700 ease-out overflow-hidden flex flex-col justify-end p-6 md:p-12 pb-24 md:pb-28 lg:pb-24 min-h-[70vh] lg:min-h-0 border-b lg:border-b-0 lg:border-r border-white/10 ${isHovered ? 'lg:flex-[1.5]' : isDimmed ? 'lg:flex-[0.75]' : 'lg:flex-1'}`}
+              className={`relative flex-1 cursor-pointer transition-all duration-700 ease-out overflow-hidden flex flex-col justify-end p-6 md:p-12 pb-24 md:pb-28 lg:pb-24 h-[50vh] sm:h-[60vh] lg:min-h-0 border-b lg:border-b-0 lg:border-r border-white/10 ${isHovered ? 'lg:flex-[1.5]' : isDimmed ? 'lg:flex-[0.75]' : 'lg:flex-1'}`}
             >
               <div className="absolute inset-0 z-0 overflow-hidden">
                 <img src={world.image} alt={world.title} className={`w-full h-full object-cover transition-all duration-700 ease-out ${isHovered ? 'scale-105 filter grayscale-0 brightness-90' : isDimmed ? 'scale-100 filter grayscale brightness-50 opacity-40' : 'scale-100 filter grayscale-[40%] brightness-75'}`} />
@@ -528,17 +528,17 @@ const MenuPage = ({ onBack, onNavigateReservation, cart, onAddToCart, onOpenCart
 
   return (
     <div className="min-h-screen bg-[#141211] text-[#FAF7F2] flex flex-col">
-      <header className="sticky top-0 z-40 bg-[#12100F]/95 backdrop-blur-xl border-b border-white/10 px-4 md:px-12 py-3 md:py-4 flex items-center justify-between">
-        <div className="flex items-center space-x-3 md:space-x-4">
-          <button onClick={onBack} aria-label="Back to home" className="p-2.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-stone-900 transition-colors"><ArrowLeft size={16} /></button>
+      <header className="sticky top-0 z-40 bg-[#12100F]/95 backdrop-blur-xl border-b border-white/10 px-3 md:px-12 py-3 md:py-4 flex items-center justify-between">
+        <div className="flex items-center space-x-2 md:space-x-4">
+          <button onClick={onBack} aria-label="Back to home" className="p-2 md:p-2.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-stone-900 transition-colors"><ArrowLeft size={16} /></button>
           <WorkSpaceBrandHeader onHomeClick={onBack} />
         </div>
         <div className="flex items-center space-x-2 md:space-x-3">
           <button onClick={() => onNavigateReservation('padel')} className="hidden sm:flex items-center space-x-1.5 px-4 py-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-xs font-semibold text-stone-300"><span>🎾 Padel Court</span></button>
           <button onClick={() => onNavigateReservation('meeting')} className="hidden sm:flex items-center space-x-1.5 px-4 py-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-xs font-semibold text-stone-300"><span>💼 6th Fl. Room</span></button>
           <button onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} className="px-3 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold">{lang === 'en' ? 'العربية' : 'English'}</button>
-          <button onClick={onOpenCart} aria-label={`Open cart (${cartTotalCount} items)`} className="relative px-4 py-2 rounded-full bg-[#C85228] hover:bg-[#d95d31] text-white text-xs font-bold tracking-wider flex items-center space-x-2 shadow-lg">
-            <ShoppingBag size={15} /><span>{t.order}</span>
+          <button onClick={onOpenCart} aria-label={`Open cart (${cartTotalCount} items)`} className="relative px-3 md:px-4 py-2 rounded-full bg-[#C85228] hover:bg-[#d95d31] text-white text-xs font-bold tracking-wider flex items-center space-x-2 shadow-lg">
+            <ShoppingBag size={15} /><span className="hidden sm:inline">{t.order}</span>
             {cartTotalCount > 0 && <span className="w-5 h-5 rounded-full bg-white text-stone-900 font-bold flex items-center justify-center text-[10px]">{cartTotalCount}</span>}
           </button>
         </div>
@@ -1015,22 +1015,22 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
       {/* Premium Sticky Header */}
       <header className="sticky top-0 z-50 bg-[#12100F]/90 backdrop-blur-xl border-b border-white/10 px-4 md:px-8 py-3 md:py-4 flex items-center justify-between shadow-lg">
         {/* Left: Logo & Back */}
-        <div className="flex items-center space-x-4 md:space-x-6">
+        <div className="flex items-center space-x-2 md:space-x-4">
           <button
             onClick={onBack}
             aria-label="Back to home"
-            className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-transparent hover:border-white/10 text-stone-300 hover:text-white transition-all group"
+            className="p-2 md:p-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-transparent hover:border-white/10 text-stone-300 hover:text-white transition-all group"
           >
-            <ArrowLeft size={18} className="group-hover:-translate-x-0.5 transition-transform" />
+            <ArrowLeft size={16} className="md:w-[18px] md:h-[18px] group-hover:-translate-x-0.5 transition-transform" />
           </button>
 
           <div className="flex items-center cursor-pointer" onClick={onBack}>
-            <img src="/workspace-logo.png" alt="WorkSpace Baghdad" className="h-9 w-auto hidden sm:block object-contain" />
-            <div className="flex flex-col ml-3 sm:border-l sm:border-white/10 sm:pl-3">
-              <span className="font-serif font-black text-lg text-white leading-none">
+            <img src="/workspace-logo.png" alt="WorkSpace Baghdad" className="h-8 md:h-9 w-auto object-contain" />
+            <div className="hidden sm:flex flex-col ml-2 md:ml-3 sm:border-l sm:border-white/10 sm:pl-3">
+              <span className="font-serif font-black text-sm md:text-lg text-white leading-none">
                 Business Suites
               </span>
-              <span className="text-[9px] uppercase tracking-widest text-[#C85228] font-bold mt-1">
+              <span className="text-[8px] md:text-[9px] uppercase tracking-widest text-[#C85228] font-bold mt-1">
                 WorkSpace Baghdad
               </span>
             </div>
@@ -1133,25 +1133,25 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
             <h2 className="text-3xl md:text-5xl font-serif font-black text-white mt-2 mb-4">Solutions for Every Stage and Scale</h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {solutions.map((sol, i) => (
               <div key={i} className="group bg-[#1A1817] rounded-3xl overflow-hidden border border-white/10 hover:border-[#C85228]/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(200,82,40,0.2)] flex flex-col animate-fade-in-up" style={{ animationDelay: `${i * 100}ms` }}>
                 
                 {/* Image Header */}
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-40 md:h-48 overflow-hidden">
                   <img src={sol.image} alt={sol.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 filter brightness-[0.6] group-hover:brightness-[0.8]" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#1A1817] via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-6 flex items-center space-x-3">
-                    <div className="w-10 h-10 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-[#C85228]">
-                      <sol.icon size={20} />
+                  <div className="absolute bottom-3 md:bottom-4 left-4 md:left-6 flex items-center space-x-2 md:space-x-3">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-[#C85228]">
+                      <sol.icon size={16} className="md:w-5 md:h-5" />
                     </div>
-                    <h3 className="font-serif font-bold text-2xl text-white drop-shadow-md">{sol.title}</h3>
+                    <h3 className="font-serif font-bold text-xl md:text-2xl text-white drop-shadow-md">{sol.title}</h3>
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-6 flex flex-col flex-grow">
-                  <p className="text-xs text-stone-400 mb-6 flex-grow">{sol.desc}</p>
+                <div className="p-4 md:p-6 flex flex-col flex-grow">
+                  <p className="text-[11px] md:text-xs text-stone-400 mb-4 md:mb-6 flex-grow">{sol.desc}</p>
                   
                   <div className="mb-6">
                     <span className="text-[10px] font-bold uppercase tracking-widest text-[#C85228] mb-3 block">WHAT'S INCLUDED</span>
@@ -1231,7 +1231,7 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
                 </div>
               </div>
             </div>
-            <div className="lg:col-span-2 bg-[#1A1817] p-8 rounded-3xl border border-white/10">
+            <div className="lg:col-span-2 bg-[#1A1817] p-5 md:p-8 rounded-3xl border border-white/10">
               {formStatus ? (
                 <div className="h-full flex flex-col items-center justify-center text-center py-12">
                   <CheckCircle2 size={48} className="text-[#25D366] mb-4" />
