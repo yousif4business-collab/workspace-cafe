@@ -1110,7 +1110,7 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
                 <img
                   src={client.logo}
                   alt={client.name}
-                  className="w-full h-full object-contain filter invert grayscale opacity-40 mix-blend-screen group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+                  className="w-full h-full object-contain filter invert hue-rotate-180 brightness-[1.3] contrast-[1.2] mix-blend-screen opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
                     const parent = (e.target as HTMLImageElement).parentElement;
