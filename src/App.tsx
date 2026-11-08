@@ -1105,18 +1105,18 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
             {[...clients, ...clients, ...clients].map((client, i) => (
               <div
                 key={i}
-                className="mx-3 md:mx-5 flex-shrink-0 w-32 md:w-44 h-20 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 flex items-center justify-center p-4 transition-all duration-500 hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 cursor-pointer group"
+                className="mx-3 md:mx-4 flex-shrink-0 w-36 h-24 md:w-44 md:h-28 bg-white rounded-2xl flex items-center justify-center p-4 shadow-lg transition-all duration-500 hover:scale-105 hover:shadow-2xl cursor-pointer group border border-white/20"
               >
                 <img
                   src={client.logo}
                   alt={client.name}
-                  className="w-full h-full object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                  className="w-full h-full object-contain filter grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
                     const parent = (e.target as HTMLImageElement).parentElement;
                     if (parent && !parent.querySelector('.fallback-text')) {
                       const span = document.createElement('span');
-                      span.className = 'fallback-text text-stone-400 font-bold text-sm tracking-wider uppercase group-hover:text-white transition-colors';
+                      span.className = 'fallback-text text-stone-900 font-bold text-xs tracking-wider uppercase text-center';
                       span.innerText = client.name;
                       parent.appendChild(span);
                     }
