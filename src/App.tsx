@@ -1105,18 +1105,18 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
             {[...clients, ...clients, ...clients].map((client, i) => (
               <div
                 key={i}
-                className="mx-6 md:mx-10 flex-shrink-0 w-24 md:w-32 h-16 flex items-center justify-center cursor-pointer group"
+                className="mx-3 md:mx-5 flex-shrink-0 w-32 md:w-44 h-20 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 flex items-center justify-center p-4 transition-all duration-500 hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 cursor-pointer group"
               >
                 <img
                   src={client.logo}
                   alt={client.name}
-                  className="w-full h-full object-contain filter invert hue-rotate-180 brightness-[1.3] contrast-[1.2] mix-blend-screen opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+                  className="w-full h-full object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
                     const parent = (e.target as HTMLImageElement).parentElement;
                     if (parent && !parent.querySelector('.fallback-text')) {
                       const span = document.createElement('span');
-                      span.className = 'fallback-text text-stone-500 font-bold text-sm tracking-wider uppercase group-hover:text-white transition-colors';
+                      span.className = 'fallback-text text-stone-400 font-bold text-sm tracking-wider uppercase group-hover:text-white transition-colors';
                       span.innerText = client.name;
                       parent.appendChild(span);
                     }
