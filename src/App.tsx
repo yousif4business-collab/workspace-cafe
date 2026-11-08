@@ -3,7 +3,7 @@ import {
   Coffee, CalendarPlus, MessageCircle, Briefcase, Sparkles,
   MapPin, Phone, ShoppingBag, Plus, Minus, X, Flame,
   ArrowLeft, ArrowUpRight, ChevronLeft, CheckCircle2,
-  Building2, Globe, Layout, Wrench, Users
+  Building2, Globe, Layout, Wrench, Users, Wifi, Zap, Bath, ShieldCheck
 } from 'lucide-react';
 
 // ─────────────────────────────────────────────────────────────
@@ -26,6 +26,26 @@ const IMAGES = {
   meetingRoom: 'meeting-room.jpg',
   padelRooftop: 'padel-rooftop.jpg',
 };
+
+const TRANSLATIONS = {
+  en: {
+    wifi: 'High-Speed Wi-Fi', electricity: '24/7 Electricity', restrooms: 'Premium Restrooms', security: '24/7 Security',
+    hours: 'Opening Hours', location: 'Location', directLine: 'Direct Line',
+    bookPadel: 'Book Your Padel Court', bookMeeting: 'Reserve 6th Floor Boardroom',
+    confirmWA: 'CONFIRM ON WHATSAPP', addCalendar: 'Add Slot to Google Calendar',
+    total: 'Grand Total', order: 'ORDER', menu: 'Full Menu'
+  },
+  ar: {
+    wifi: 'واي فاي سريع', electricity: 'كهرباء 24/7', restrooms: 'حمامات فاخرة', security: 'أمن 24/7',
+    hours: 'ساعات العمل', location: 'الموقع', directLine: 'الخط المباشر',
+    bookPadel: 'احجز ملعب البادل', bookMeeting: 'احجز قاعة الاجتماعات',
+    confirmWA: 'تأكيد عبر واتساب', addCalendar: 'إضافة إلى تقويم جوجل',
+    total: 'المجموع الكلي', order: 'اطلب', menu: 'القائمة الكاملة'
+  }
+};
+
+type Language = keyof typeof TRANSLATIONS;
+type LanguageProps = { lang: Language; setLang: (lang: Language) => void; };
 
 // ─────────────────────────────────────────────────────────────
 // TYPES
@@ -356,7 +376,7 @@ const MENU_ITEMS: MenuItem[] = [
 // ─────────────────────────────────────────────────────────────
 // GATEWAY (HOME)
 // ─────────────────────────────────────────────────────────────
-const GatewayPage = ({ onSelectWorld }: { onSelectWorld: (id: WorldId) => void }) => {
+const GatewayPage = ({ onSelectWorld, lang, setLang }: { onSelectWorld: (id: WorldId) => void } & LanguageProps) => {
   const [hoveredPanel, setHoveredPanel] = useState<WorldId | null>(null);
 
   const worlds: World[] = [
@@ -379,9 +399,14 @@ const GatewayPage = ({ onSelectWorld }: { onSelectWorld: (id: WorldId) => void }
     <div className="relative w-full min-h-screen lg:h-screen lg:overflow-hidden bg-[#12100F] text-white flex flex-col">
       <header className="absolute top-0 left-0 right-0 z-40 px-4 md:px-12 py-3 md:py-5 flex items-center justify-between pointer-events-none">
         <div className="pointer-events-auto"><WorkSpaceBrandHeader /></div>
-        <div className="pointer-events-auto hidden sm:flex items-center space-x-3 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 text-xs">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-stone-300 font-medium">{SITE.hours}</span>
+        <div className="pointer-events-auto flex items-center gap-2">
+          <button onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} className="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold transition-all">
+            {lang === 'en' ? 'العربية' : 'English'}
+          </button>
+          <div className="hidden sm:flex items-center space-x-3 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 text-xs">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-stone-300 font-medium">{SITE.hours}</span>
+          </div>
         </div>
       </header>
 
@@ -601,9 +626,10 @@ const MenuPage = ({ onBack, onNavigateReservation, cart, onAddToCart, onOpenCart
 type ReservationPageProps = {
   type: 'padel' | 'meeting';
   onBack: () => void;
-};
+} & LanguageProps;
 
-const ReservationPage = ({ type, onBack }: ReservationPageProps) => {
+const ReservationPage = ({ type, onBack, lang, setLang }: ReservationPageProps) => {
+  const t = TRANSLATIONS[lang];
   const isPadel = type === 'padel';
   const days = useMemo(() => getNextDays(7), []);
   const [dateIndex, setDateIndex] = useState(() => { const d = getNextDays(7); const i = d.findIndex((x) => !x.disabled); return i >= 0 ? i : 0; });
@@ -673,8 +699,13 @@ const ReservationPage = ({ type, onBack }: ReservationPageProps) => {
             <WorkSpaceBrandHeader onHomeClick={onBack} />
           )}
         </div>
-        <div className="text-right text-xs text-stone-400 hidden sm:block">
-          <div>{SITE.hours}</div><div className="text-[#C85228] font-bold">{SITE.location}</div>
+        <div className="flex items-center gap-2">
+          <button onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} className="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold transition-all">
+            {lang === 'en' ? 'العربية' : 'English'}
+          </button>
+          <div className="text-right text-xs text-stone-400 hidden sm:block">
+            <div>{SITE.hours}</div><div className="text-[#C85228] font-bold">{SITE.location}</div>
+          </div>
         </div>
       </header>
 
@@ -700,16 +731,25 @@ const ReservationPage = ({ type, onBack }: ReservationPageProps) => {
               </div>
             </div>
           )}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4">
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
-              <CalendarPlus size={16} className="text-[#C85228] mb-1" /><div className="text-xs font-bold text-white">Opening Hours</div><div className="text-[11px] text-stone-400">{SITE.hours}</div>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+              <Wifi size={16} className="text-[#C85228] mb-2" /><div className="text-xs font-bold text-white">{t.wifi}</div><div className="text-[10px] text-stone-400">Fiber Optic</div>
             </div>
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
-              <MapPin size={16} className="text-[#C85228] mb-1" /><div className="text-xs font-bold text-white">Location</div><div className="text-[11px] text-stone-400">Hay Al-Jamia, Baghdad</div>
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+              <Zap size={16} className="text-[#C85228] mb-2" /><div className="text-xs font-bold text-white">{t.electricity}</div><div className="text-[10px] text-stone-400">Generator Backed</div>
             </div>
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 col-span-2 sm:col-span-1">
-              <Phone size={16} className="text-[#C85228] mb-1" /><div className="text-xs font-bold text-white">Direct Line</div>
-              <a href={`tel:+${WHATSAPP_NUMBER}`} className="text-[11px] text-stone-400 font-mono hover:text-white transition-colors">{WHATSAPP_DISPLAY}</a>
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+              <Bath size={16} className="text-[#C85228] mb-2" /><div className="text-xs font-bold text-white">{t.restrooms}</div><div className="text-[10px] text-stone-400">Sanitized Hourly</div>
+            </div>
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+              <ShieldCheck size={16} className="text-[#C85228] mb-2" /><div className="text-xs font-bold text-white">{t.security}</div><div className="text-[10px] text-stone-400">CCTV Monitored</div>
+            </div>
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors col-span-2 lg:col-span-1">
+              <MapPin size={16} className="text-[#C85228] mb-2" /><div className="text-xs font-bold text-white">{t.location}</div><div className="text-[10px] text-stone-400">Hay Al-Jamia, Baghdad</div>
+            </div>
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors col-span-2 lg:col-span-1">
+              <Phone size={16} className="text-[#C85228] mb-2" /><div className="text-xs font-bold text-white">{t.directLine}</div>
+              <a href={`tel:+${WHATSAPP_NUMBER}`} className="text-[10px] text-stone-400 font-mono hover:text-white">{WHATSAPP_DISPLAY}</a>
             </div>
           </div>
         </div>
@@ -875,7 +915,7 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onBrowse }: CartD
 // ─────────────────────────────────────────────────────────────
 // OFFICE SOLUTIONS
 // ─────────────────────────────────────────────────────────────
-const OfficeSolutionsPage = ({ onBack }: { onBack: () => void }) => {
+const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } & LanguageProps) => {
   const solutions = [
     { icon: Building2, title: 'Private Offices', desc: 'Dedicated, locked suites for teams that need privacy and focus.', price: '1,500,000 IQD', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80' },
     { icon: Briefcase, title: 'Serviced Offices', desc: 'Fully managed, move-in ready with admin and IT support.', price: '2,000,000 IQD', image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80' },
@@ -887,7 +927,9 @@ const OfficeSolutionsPage = ({ onBack }: { onBack: () => void }) => {
 
   const amenities = [
     'Prime Baghdad Location',
-    'High-Speed Connectivity',
+    'High-Speed Fiber Wi-Fi',
+    '24/7 Generator Electricity',
+    'Premium Sanitized Restrooms',
     'Rooftop Padel Court',
     'F&B Café Bar',
     '24/7 Security & Access',
@@ -909,9 +951,14 @@ const OfficeSolutionsPage = ({ onBack }: { onBack: () => void }) => {
             </div>
           </div>
         </div>
-        <div className="text-right text-xs text-stone-400 hidden sm:block">
-          <div>{SITE.hours}</div>
-          <div className="text-[#C85228] font-bold">{SITE.location}</div>
+        <div className="flex items-center gap-2">
+          <button onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} className="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold transition-all">
+            {lang === 'en' ? 'العربية' : 'English'}
+          </button>
+          <div className="text-right text-xs text-stone-400 hidden sm:block">
+            <div>{SITE.hours}</div>
+            <div className="text-[#C85228] font-bold">{SITE.location}</div>
+          </div>
         </div>
       </header>
 
@@ -1033,6 +1080,7 @@ export default function App() {
     } catch { return []; }
   });
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [lang, setLang] = useState<Language>('en');
 
   useEffect(() => {
     try { localStorage.setItem('workspace_cart', JSON.stringify(cart)); } catch {}
@@ -1060,12 +1108,12 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#12100F] font-sans text-stone-100 selection:bg-[#C85228] selection:text-white">
+    <div dir={lang === 'ar' ? 'rtl' : 'ltr'} className="min-h-screen bg-[#12100F] font-sans text-stone-100 selection:bg-[#C85228] selection:text-white">
       <GlobalStyles />
-      {currentPage === 'home' && <GatewayPage onSelectWorld={(id) => setCurrentPage(id)} />}
+      {currentPage === 'home' && <GatewayPage onSelectWorld={(id) => setCurrentPage(id)} lang={lang} setLang={setLang} />}
       {currentPage === 'menu' && <MenuPage onBack={() => setCurrentPage('home')} onNavigateReservation={(type) => setCurrentPage(type)} cart={cart} onAddToCart={handleAddToCart} onOpenCart={() => setIsCartOpen(true)} />}
-      {(currentPage === 'padel' || currentPage === 'meeting') && <ReservationPage type={currentPage} onBack={() => setCurrentPage('home')} />}
-      {currentPage === 'office' && <OfficeSolutionsPage onBack={() => setCurrentPage('home')} />}
+      {(currentPage === 'padel' || currentPage === 'meeting') && <ReservationPage type={currentPage} onBack={() => setCurrentPage('home')} lang={lang} setLang={setLang} />}
+      {currentPage === 'office' && <OfficeSolutionsPage onBack={() => setCurrentPage('home')} lang={lang} setLang={setLang} />}
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cart={cart} onUpdateQuantity={handleUpdateQuantity} onBrowse={() => setCurrentPage('menu')} />
     </div>
   );
