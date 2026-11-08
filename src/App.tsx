@@ -198,6 +198,16 @@ const GlobalStyles = () => (
     }
     @keyframes slide-up { from { transform: translateY(16px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     @keyframes slide-in-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: max-content;
+      animation: scroll 35s linear infinite;
+    }
+    .animate-marquee:hover { animation-play-state: paused; }
 
     .animate-fade-in-up { animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
     .animate-scale-in { animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
@@ -1028,17 +1038,21 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } &
           <p className="text-sm md:text-base text-stone-400 font-light leading-relaxed max-w-xl mx-auto">{t.officeHeroDesc}</p>
         </div>
 
-        {/* Trusted Clients Strip */}
-        <div className="mb-16 animate-fade-in-up">
-          <p className="text-center text-[10px] font-bold tracking-[0.2em] uppercase text-stone-400 mb-6">{t.officeClients}</p>
-          <div className="grid grid-cols-4 sm:grid-cols-8 gap-3 items-center">
-            {clients.map((client, i) => (
-              <div key={i} className="bg-white rounded-xl flex items-center justify-center aspect-[3/2] overflow-hidden p-2 sm:p-3 shadow-sm hover:shadow-md transition-shadow">
-                <img src={client.logo} alt={client.name} className="w-full h-full object-contain" />
+        {/* Trusted Clients Marquee */}
+        <section className="py-12 mb-16 bg-[#0A0908] border-b border-white/5 overflow-hidden relative">
+          <p className="text-center text-[10px] font-bold tracking-[0.2em] uppercase text-stone-500 mb-8">{t.officeClients}</p>
+
+          <div className="absolute top-0 bottom-0 left-0 w-24 md:w-48 bg-gradient-to-r from-[#0A0908] to-transparent z-10 pointer-events-none" />
+          <div className="absolute top-0 bottom-0 right-0 w-24 md:w-48 bg-gradient-to-l from-[#0A0908] to-transparent z-10 pointer-events-none" />
+
+          <div className="animate-marquee items-center">
+            {[...clients, ...clients].map((client, i) => (
+              <div key={i} className="mx-4 sm:mx-6 flex-shrink-0 w-32 md:w-40 h-20 bg-white rounded-2xl flex items-center justify-center p-4 shadow-sm border border-white/10 cursor-pointer group">
+                <img src={client.logo} alt={client.name} className="w-full h-full object-contain filter grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Premium Card Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
