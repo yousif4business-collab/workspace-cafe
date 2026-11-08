@@ -947,7 +947,7 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onBrowse }: CartD
 // OFFICE SOLUTIONS
 // ─────────────────────────────────────────────────────────────
 const LocationMap = () => {
-  const embedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m2!1s0x1557825e69c7fb83%3A0x6b1f2e3c4d5a6b7c!2sHay%20Al-Jamia%2C%20Baghdad%2C%20Iraq!5e0!3m2!1sen!2siq!4v1700000000000!5m2!1sen!2siq';
+  const embedUrl = 'https://maps.google.com/maps?q=33.309444,44.314722&hl=en&z=15&output=embed';
   return (
     <div className="w-full h-80 md:h-96 rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative group mb-16">
       <iframe title="WorkSpace Baghdad Location" src={embedUrl} width="100%" height="100%" style={{ border: 0, filter: 'grayscale(20%) contrast(1.1)' }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-full h-full" />
@@ -986,18 +986,18 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } &
   ];
 
   const clients = [
-    { name: 'Uber', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/58/Uber_logo_2018.svg' },
-    { name: 'Careem', logo: 'https://cdn.worldvectorlogo.com/logos/careem.svg' },
-    { name: 'Hyundai', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Hyundai_Motor_Company_logo.svg' },
-    { name: 'Zain', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Zain_logo.svg' },
-    { name: 'Asiacell', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Asiacell_logo.svg' },
-    { name: 'Korek', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Korek_logo.svg' },
-    { name: 'Fastlink', logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6e/Fastlink_logo.svg' },
-    { name: 'Miswag', logo: 'https://logo.clearbit.com/miswag.com' },
+    { name: 'Uber', logo: 'https://logo.clearbit.com/uber.com' },
+    { name: 'Careem', logo: 'https://logo.clearbit.com/careem.com' },
+    { name: 'Al Majal', logo: 'https://logo.clearbit.com/almajal.com' },
+    { name: 'Abwaab', logo: 'https://logo.clearbit.com/abwaab.com' },
+    { name: 'ABS', logo: 'https://logo.clearbit.com/abs.com' },
+    { name: 'Hyundai', logo: 'https://logo.clearbit.com/hyundai.com' },
+    { name: 'Orderii', logo: 'https://logo.clearbit.com/orderii.com' },
+    { name: 'Ameena', logo: 'https://logo.clearbit.com/ameena.com' },
   ];
 
   const galleryImages = [
-    { src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80', label: lang === 'en' ? 'Building Exterior' : 'المبنى من الخارج' },
+    { src: '/building.jpg', label: lang === 'en' ? 'Building Exterior' : 'المبنى من الخارج' },
     { src: encodeURI(IMAGES.padelRooftop), label: lang === 'en' ? 'Rooftop Padel Court' : 'ملعب البادل على السطح' },
     { src: encodeURI(IMAGES.meetingRoom), label: lang === 'en' ? 'Executive Boardroom' : 'قاعة الاجتماعات التنفيذية' },
   ];
