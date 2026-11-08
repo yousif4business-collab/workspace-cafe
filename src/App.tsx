@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import {
   Coffee, CalendarPlus, MessageCircle, Briefcase, Sparkles,
   MapPin, Phone, ShoppingBag, Plus, Minus, X, Flame,
@@ -113,8 +113,9 @@ function generateTimeSlots(duration: number): TimeSlot[] {
   const slots: TimeSlot[] = [];
   const preBooked = [SITE.openHour, 14];
   for (let h = SITE.openHour; h < SITE.closeHour; h++) {
-    const label =
-      h < 12 ? `${h}:00 AM` : h === 12 ? '12:00 PM' : `${h - 12}:00 PM`;
+    const hour12 = h % 12 || 12;
+    const period = h < 12 ? 'AM' : 'PM';
+    const label = `${hour12}:00 ${period}`;
     slots.push({
       time: label,
       hour: h,
