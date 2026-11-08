@@ -987,14 +987,17 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
   ];
 
   const clients = [
-    { name: 'Uber', logo: 'https://logo.clearbit.com/uber.com' },
-    { name: 'Careem', logo: 'https://logo.clearbit.com/careem.com' },
-    { name: 'Al Majal', logo: 'https://logo.clearbit.com/almajal.com' },
-    { name: 'Abwaab', logo: 'https://logo.clearbit.com/abwaab.com' },
-    { name: 'ABS', logo: 'https://logo.clearbit.com/abs.com' },
-    { name: 'Hyundai', logo: 'https://logo.clearbit.com/hyundai.com' },
-    { name: 'Orderii', logo: 'https://logo.clearbit.com/orderii.com' },
-    { name: 'Ameena', logo: 'https://logo.clearbit.com/ameena.com' },
+    { name: 'Uber', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/58/Uber_logo_2018.svg' },
+    { name: 'Careem', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Careem_logo.svg/512px-Careem_logo.svg.png' },
+    { name: 'Hyundai', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Hyundai_Motor_Company_logo.svg' },
+    { name: 'Zain', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Zain_logo.svg' },
+    { name: 'Asiacell', logo: 'https://upload.wikimedia.org/wikipedia/en/8/86/Asiacell_logo.png' },
+    { name: 'Korek', logo: 'https://upload.wikimedia.org/wikipedia/en/5/5b/Korek_Telecom_logo.png' },
+    { name: 'Abwaab', logo: 'https://ui-avatars.com/api/?name=Abwaab&background=ffffff&color=000000&bold=true&size=128' },
+    { name: 'ABS', logo: 'https://ui-avatars.com/api/?name=ABS&background=ffffff&color=000000&bold=true&size=128' },
+    { name: 'Orderii', logo: 'https://ui-avatars.com/api/?name=Orderii&background=ffffff&color=000000&bold=true&size=128' },
+    { name: 'Ameena', logo: 'https://ui-avatars.com/api/?name=Ameena&background=ffffff&color=000000&bold=true&size=128' },
+    { name: 'Al Majal', logo: 'https://ui-avatars.com/api/?name=Al+Majal&background=ffffff&color=000000&bold=true&size=128' },
   ];
 
   const galleryImages = [
@@ -1065,7 +1068,7 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
                 <img 
                   src={client.logo} 
                   alt={client.name} 
-                  className="w-full h-full object-contain filter grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" 
+                  className="w-full h-full object-contain filter grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 p-2"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
                     const parent = (e.target as HTMLImageElement).parentElement;
