@@ -936,6 +936,23 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } &
     'Business-Ready Infrastructure'
   ];
 
+  const clients = [
+    { name: 'Uber', logo: 'https://workspaceiq.replit.app/logo-uber.svg' },
+    { name: 'Careem', logo: 'https://workspaceiq.replit.app/logo-careem.jpg' },
+    { name: 'Al Majal', logo: 'https://workspaceiq.replit.app/logo-almajal.jpg' },
+    { name: 'Abwaab', logo: 'https://workspaceiq.replit.app/logo-abwaab.jpg' },
+    { name: 'ABS', logo: 'https://workspaceiq.replit.app/logo-abs.jpg' },
+    { name: 'Hyundai', logo: 'https://workspaceiq.replit.app/logo-hyundai.jpg' },
+    { name: 'Orderii', logo: 'https://workspaceiq.replit.app/logo-orderii.jpg' },
+    { name: 'Ameena', logo: 'https://workspaceiq.replit.app/logo-ameena.jpg' },
+  ];
+
+  const galleryImages = [
+    { src: 'https://workspaceiq.replit.app/building-exterior.jpg', label: 'Building Exterior' },
+    { src: encodeURI(IMAGES.padelRooftop), label: 'Rooftop Padel Court' },
+    { src: encodeURI(IMAGES.meetingRoom), label: 'Executive Boardroom' },
+  ];
+
   return (
     <div className="min-h-screen bg-[#12100F] text-[#FAF7F2] flex flex-col">
       <header className="sticky top-0 z-40 bg-[#12100F]/95 backdrop-blur-xl border-b border-white/10 px-4 md:px-12 py-3 md:py-4 flex items-center justify-between">
@@ -975,6 +992,20 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } &
           <p className="text-sm md:text-base text-stone-400 font-light leading-relaxed max-w-xl mx-auto">
             From a single desk to an entire corporate floor. WorkSpace provides the environment, address, and infrastructure your business needs to thrive in Baghdad.
           </p>
+        </div>
+
+        {/* Trusted Clients Strip */}
+        <div className="mb-16 animate-fade-in-up">
+          <p className="text-center text-[10px] font-bold tracking-[0.2em] uppercase text-stone-400 mb-6">
+            Trusted by Leading Companies
+          </p>
+          <div className="grid grid-cols-4 sm:grid-cols-8 gap-3 items-center">
+            {clients.map((client, i) => (
+              <div key={i} className="bg-white rounded-xl flex items-center justify-center aspect-[3/2] overflow-hidden p-2 sm:p-3 shadow-sm hover:shadow-md transition-shadow">
+                <img src={client.logo} alt={client.name} className="w-full h-full object-contain" />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Premium Card Grid */}
@@ -1058,6 +1089,23 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } &
               <Phone size={16} />
               <span>CALL US</span>
             </a>
+          </div>
+        </div>
+
+        {/* Building Gallery */}
+        <div className="mb-16 animate-fade-in-up delay-100">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-serif font-black text-white">See WorkSpace in Detail.</h2>
+            <p className="text-sm text-stone-400 mt-2">Premium architecture, professional interiors, and a workspace environment designed for serious businesses.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {galleryImages.map((img, i) => (
+              <div key={i} className="group relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl h-72 md:h-96">
+                <img src={img.src} alt={img.label} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 filter brightness-[0.6] group-hover:brightness-[0.8]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#12100F] via-transparent to-transparent opacity-80" />
+                <span className="absolute bottom-5 left-5 text-sm font-bold text-white tracking-wide">{img.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </main>
