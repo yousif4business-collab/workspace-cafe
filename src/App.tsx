@@ -1013,28 +1013,64 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
 
   return (
     <div className="min-h-screen bg-[#12100F] text-[#FAF7F2] flex flex-col font-sans">
-      {/* Sticky Header */}
-      <header className="sticky top-0 z-50 bg-[#12100F]/95 backdrop-blur-xl border-b border-white/10 px-4 md:px-12 py-4 flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <button onClick={onBack} aria-label="Back to home" className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors">
-            <ArrowLeft size={20} />
+      {/* Premium Sticky Header */}
+      <header className="sticky top-0 z-50 bg-[#12100F]/90 backdrop-blur-xl border-b border-white/10 px-4 md:px-8 py-3 md:py-4 flex items-center justify-between shadow-lg">
+        {/* Left: Logo & Back */}
+        <div className="flex items-center space-x-4 md:space-x-6">
+          <button
+            onClick={onBack}
+            aria-label="Back to home"
+            className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-transparent hover:border-white/10 text-stone-300 hover:text-white transition-all group"
+          >
+            <ArrowLeft size={18} className="group-hover:-translate-x-0.5 transition-transform" />
           </button>
-          <span className="font-serif font-black text-xl text-white tracking-tight">WORKSPACE</span>
+
+          <div className="flex items-center cursor-pointer" onClick={onBack}>
+            <img src="/workspace-logo.png" alt="WorkSpace Baghdad" className="h-9 w-auto hidden sm:block object-contain" />
+            <div className="flex flex-col ml-3 sm:border-l sm:border-white/10 sm:pl-3">
+              <span className="font-serif font-black text-lg text-white leading-none">
+                Business Suites
+              </span>
+              <span className="text-[9px] uppercase tracking-widest text-[#C85228] font-bold mt-1">
+                WorkSpace Baghdad
+              </span>
+            </div>
+          </div>
         </div>
-        <div className="hidden lg:flex items-center space-x-6 text-sm font-medium text-stone-300">
-          <a href="#workspaces" className="hover:text-white transition-colors">{lang === 'en' ? 'Workspaces' : 'مساحات العمل'}</a>
-          <a href="#gallery" className="hover:text-white transition-colors">{lang === 'en' ? 'Gallery' : 'معرض الصور'}</a>
-          <a href="#contact" className="hover:text-white transition-colors">{lang === 'en' ? 'Contact' : 'اتصل بنا'}</a>
-        </div>
+
+        {/* Center: Navigation Links (Desktop) */}
+        <nav className="hidden lg:flex items-center space-x-8 text-xs font-bold uppercase tracking-wider text-stone-400">
+          <a href="#workspaces" className="hover:text-white hover:border-b-2 hover:border-[#C85228] pb-1 transition-all">{lang === 'en' ? 'Workspaces' : 'مساحات العمل'}</a>
+          <a href="#gallery" className="hover:text-white hover:border-b-2 hover:border-[#C85228] pb-1 transition-all">{lang === 'en' ? 'Gallery' : 'معرض الصور'}</a>
+          <a href="#contact" className="hover:text-white hover:border-b-2 hover:border-[#C85228] pb-1 transition-all">{lang === 'en' ? 'Contact' : 'اتصل بنا'}</a>
+        </nav>
+
+        {/* Right: Contact & Actions */}
         <div className="flex items-center space-x-3">
-          <a href={`tel:+${WHATSAPP_NUMBER}`} className="hidden sm:flex items-center space-x-2 text-sm font-bold text-white hover:text-[#C85228] transition-colors">
-            <Phone size={16} /> <span>+964 788 295 9696</span>
+          <a
+            href={`tel:+${WHATSAPP_NUMBER}`}
+            className="hidden xl:flex items-center space-x-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-stone-300 hover:text-white transition-all text-xs font-mono font-semibold"
+          >
+            <Phone size={14} className="text-[#C85228]" />
+            <span>+964 788 295 9696</span>
           </a>
-          <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="hidden sm:flex items-center space-x-2 px-5 py-2.5 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-white text-sm font-bold shadow-lg transition-all">
-            <MessageCircle size={16} /> <span>WhatsApp</span>
+
+          <a
+            href={`https://wa.me/${WHATSAPP_NUMBER}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-2 px-4 md:px-5 py-2.5 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-stone-950 font-bold text-xs tracking-wide shadow-lg shadow-emerald-500/20 transition-all hover:-translate-y-0.5"
+          >
+            <MessageCircle size={16} />
+            <span className="hidden sm:inline">WhatsApp</span>
           </a>
-          <button onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} className="px-3 py-2 rounded-full bg-white/10 border border-white/10 text-xs font-bold hover:bg-white/20 transition-colors">
-            {lang === 'en' ? 'العربية' : 'English'}
+
+          <button
+            onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
+            className="px-3 py-2 md:px-4 md:py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-bold text-white transition-all flex items-center space-x-1"
+          >
+            <Globe size={12} className="text-stone-400" />
+            <span>{lang === 'en' ? 'العربية' : 'English'}</span>
           </button>
         </div>
       </header>
