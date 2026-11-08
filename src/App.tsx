@@ -987,17 +987,15 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
   ];
 
   const clients = [
-    { name: 'Uber', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/58/Uber_logo_2018.svg' },
-    { name: 'Careem', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Careem_logo.svg/512px-Careem_logo.svg.png' },
-    { name: 'Hyundai', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Hyundai_Motor_Company_logo.svg' },
-    { name: 'Zain', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Zain_logo.svg' },
-    { name: 'Asiacell', logo: 'https://upload.wikimedia.org/wikipedia/en/8/86/Asiacell_logo.png' },
-    { name: 'Korek', logo: 'https://upload.wikimedia.org/wikipedia/en/5/5b/Korek_Telecom_logo.png' },
-    { name: 'Abwaab', logo: 'https://ui-avatars.com/api/?name=Abwaab&background=ffffff&color=000000&bold=true&size=128' },
-    { name: 'ABS', logo: 'https://ui-avatars.com/api/?name=ABS&background=ffffff&color=000000&bold=true&size=128' },
-    { name: 'Orderii', logo: 'https://ui-avatars.com/api/?name=Orderii&background=ffffff&color=000000&bold=true&size=128' },
-    { name: 'Ameena', logo: 'https://ui-avatars.com/api/?name=Ameena&background=ffffff&color=000000&bold=true&size=128' },
-    { name: 'Al Majal', logo: 'https://ui-avatars.com/api/?name=Al+Majal&background=ffffff&color=000000&bold=true&size=128' },
+    { name: 'Geely', logo: '/logos/geely.png' },
+    { name: 'Al Majal', logo: '/logos/almajal.png' },
+    { name: 'Careem', logo: '/logos/careem.png' },
+    { name: 'Abwaab', logo: '/logos/abwaab.png' },
+    { name: 'Padel Club', logo: '/logos/padelclub.png' },
+    { name: 'WorkSpace Cafe', logo: '/logos/workspace.png' },
+    { name: 'Orderii', logo: '/logos/orderii.png' },
+    { name: 'Hyundai', logo: '/logos/hyundai.png' },
+    { name: 'ABS', logo: '/logos/abs.png' },
   ];
 
   const galleryImages = [
