@@ -3,7 +3,7 @@ import {
   Coffee, CalendarPlus, MessageCircle, Briefcase, Sparkles,
   MapPin, Phone, ShoppingBag, Plus, Minus, X, Flame,
   ArrowLeft, ArrowUpRight, ChevronLeft, CheckCircle2,
-  Building2, Globe, Layout, Wrench, Users, Wifi, Zap, Bath, ShieldCheck
+  Building2, Globe, Layout, Wrench, Users, Wifi, Zap, Bath, ShieldCheck, Navigation
 } from 'lucide-react';
 
 // ─────────────────────────────────────────────────────────────
@@ -936,6 +936,23 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onBrowse }: CartD
 // ─────────────────────────────────────────────────────────────
 // OFFICE SOLUTIONS
 // ─────────────────────────────────────────────────────────────
+const LocationMap = () => {
+  const embedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m2!1s0x1557825e69c7fb83%3A0x6b1f2e3c4d5a6b7c!2sHay%20Al-Jamia%2C%20Baghdad%2C%20Iraq!5e0!3m2!1sen!2siq!4v1700000000000!5m2!1sen!2siq';
+  return (
+    <div className="w-full h-80 md:h-96 rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative group mb-16">
+      <iframe title="WorkSpace Baghdad Location" src={embedUrl} width="100%" height="100%" style={{ border: 0, filter: 'grayscale(20%) contrast(1.1)' }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-full h-full" />
+      <div className="absolute bottom-4 left-4 right-4 flex flex-wrap justify-between gap-3 items-center pointer-events-none">
+        <div className="bg-black/80 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
+          <p className="text-white text-xs font-bold flex items-center gap-2"><MapPin size={14} className="text-[#C85228]" /> Hay Al-Jamia, Baghdad</p>
+        </div>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Hay+Al-Jamia,+Baghdad,+Iraq" target="_blank" rel="noopener noreferrer" className="pointer-events-auto bg-[#C85228] hover:bg-[#d95d31] text-white text-xs font-bold px-5 py-2.5 rounded-full shadow-lg transition-all flex items-center gap-2">
+          <Navigation size={14} /> Get Directions
+        </a>
+      </div>
+    </div>
+  );
+};
+
 const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } & LanguageProps) => {
   const t = TRANSLATIONS[lang];
   const solutions = [
@@ -1123,11 +1140,24 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void } &
             ))}
           </div>
         </div>
+        <LocationMap />
       </main>
     </div>
   );
 };
 
+const FloatingWhatsApp = () => (
+  <a
+    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello WorkSpace Baghdad! I would like to inquire about your services.')}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="fixed bottom-6 right-6 z-[100] bg-[#25D366] hover:bg-[#20ba5a] text-white p-4 rounded-full shadow-2xl transition-all hover:scale-110 flex items-center justify-center group"
+    aria-label="Chat on WhatsApp"
+  >
+    <MessageCircle size={24} />
+    <span className="absolute right-16 bg-stone-900 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-white/10">Chat with us!</span>
+  </a>
+);
 
 // ─────────────────────────────────────────────────────────────
 // APP ROOT
@@ -1178,6 +1208,7 @@ export default function App() {
       {(currentPage === 'padel' || currentPage === 'meeting') && <ReservationPage type={currentPage} onBack={() => setCurrentPage('home')} lang={lang} setLang={setLang} />}
       {currentPage === 'office' && <OfficeSolutionsPage onBack={() => setCurrentPage('home')} lang={lang} setLang={setLang} />}
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cart={cart} onUpdateQuantity={handleUpdateQuantity} onBrowse={() => setCurrentPage('menu')} />
+      <FloatingWhatsApp />
     </div>
   );
 }
