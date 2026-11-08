@@ -987,15 +987,14 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
   ];
 
   const clients = [
-    { name: 'Geely', logo: '/logos/geely.png' },
     { name: 'Al Majal', logo: '/logos/almajal.png' },
     { name: 'Careem', logo: '/logos/careem.png' },
     { name: 'Abwaab', logo: '/logos/abwaab.png' },
-    { name: 'Padel Club', logo: '/logos/padelclub.png' },
     { name: 'WorkSpace Cafe', logo: '/logos/workspace.png' },
     { name: 'Orderii', logo: '/logos/orderii.png' },
     { name: 'Hyundai', logo: '/logos/hyundai.png' },
     { name: 'ABS', logo: '/logos/abs.png' },
+    { name: 'Ameena', logo: '/logos/ameena.png' },
   ];
 
   const galleryImages = [
