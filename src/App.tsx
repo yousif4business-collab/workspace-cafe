@@ -245,7 +245,7 @@ const WorkSpaceBrandHeader = ({ onHomeClick }: { onHomeClick?: () => void }) => 
       className="flex items-center cursor-pointer group select-none transition-opacity hover:opacity-90 focus:outline-none"
       aria-label="Go to home"
     >
-      <img src="/logo.png" alt="WorkSpace Cafe" className="h-12 md:h-14 w-auto object-contain" />
+      <img src="/workspace-logo.png" alt="WorkSpace Cafe" className="h-12 md:h-14 w-auto object-contain" />
     </button>
   );
 };
@@ -946,38 +946,55 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
       icon: Building2, title: lang === 'en' ? 'Private Offices' : 'مكاتب خاصة', 
       desc: lang === 'en' ? 'Dedicated, locked office suites for companies that require privacy, focus, and a credible business address. Suitable for teams of all sizes.' : 'أجنحة مكتبية مخصصة ومقفلة للشركات التي تتطلب الخصوصية والتركيز وعنوان عمل موثوق. مناسبة للفرق من جميع الأحجام.',
       includes: lang === 'en' ? ['Dedicated locked office', 'Professional business address', '24/7 access', 'High-speed internet', 'Meeting room credits', 'Reception services'] : ['مكتب مقفل مخصص', 'عنوان عمل احترافي', 'وصول 24/7', 'إنترنت عالي السرعة', 'أرصدة غرف الاجتماعات', 'خدمات الاستقبال'],
-      suitable: lang === 'en' ? 'Established companies, regional offices, project teams, corporate occupiers' : 'الشركات الراسخة، المكاتب الإقليمية، فرق المشاريع، المستأجرين من الشركات'
+      suitable: lang === 'en' ? 'Established companies, regional offices, project teams, corporate occupiers' : 'الشركات الراسخة، المكاتب الإقليمية، فرق المشاريع، المستأجرين من الشركات',
+      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'
     },
     { 
       icon: Briefcase, title: lang === 'en' ? 'Serviced Offices' : 'مكاتب مخدومة', 
       desc: lang === 'en' ? 'Move-in ready, fully managed office environments with business-ready infrastructure and support. Set up and operational from day one.' : 'بيئات مكتبية جاهزة للانتقال ومُدارة بالكامل مع بنية تحتية ودعم جاهزين للأعمال. جاهزة للعمل من اليوم الأول.',
       includes: lang === 'en' ? ['Fully furnished & equipped', 'Managed IT infrastructure', 'Admin & reception support', 'Utilities included', 'Flexible lease terms', 'Business support services'] : ['مفروشة ومجهزة بالكامل', 'بنية تحتية مُدارة لتقنية المعلومات', 'دعم إداري واستقبال', 'تشمل المرافق', 'شروط إيجار مرنة', 'خدمات دعم الأعمال'],
-      suitable: lang === 'en' ? 'Companies needing an immediate, professional base with full support' : 'الشركات التي تحتاج إلى قاعدة احترافية فورية مع دعم كامل'
+      suitable: lang === 'en' ? 'Companies needing an immediate, professional base with full support' : 'الشركات التي تحتاج إلى قاعدة احترافية فورية مع دعم كامل',
+      image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80'
     },
     { 
       icon: Users, title: lang === 'en' ? 'Enterprise Suites' : 'أجنحة الشركات', 
       desc: lang === 'en' ? 'Large-format office solutions for established companies and major occupiers. Entire floors and bespoke configurations for regional headquarters and corporate teams.' : 'حلول مكتبية واسعة النطاق للشركات الراسخة والمستأجرين الكبار. طوابق كاملة وتكوينات مخصصة للمقرات الإقليمية وفرق الشركات.',
       includes: lang === 'en' ? ['Entire floor availability', 'Bespoke configuration', 'Dedicated reception & support', 'Branded environment options', 'Full building services', 'Premium address & facilities'] : ['توفر طابق كامل', 'تكوين مخصص', 'استقبال ودعم مخصص', 'خيارات بيئة ذات علامة تجارية', 'خدمات المبنى الكاملة', 'عنوان ومرافق متميزة'],
-      suitable: lang === 'en' ? 'Major corporate occupiers, regional HQs, established businesses' : 'المستأجرون من الشركات الكبرى، المقرات الإقليمية، الشركات الراسخة'
+      suitable: lang === 'en' ? 'Major corporate occupiers, regional HQs, established businesses' : 'المستأجرون من الشركات الكبرى، المقرات الإقليمية، الشركات الراسخة',
+      image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80'
     },
     { 
       icon: Globe, title: lang === 'en' ? 'Virtual Offices' : 'مكاتب افتراضية', 
       desc: lang === 'en' ? 'A professional Baghdad business address and presence without the need for full-time physical occupancy. Credible, cost-effective, and ready immediately.' : 'عنوان عمل احترافي في بغداد وحضور دون الحاجة إلى إشغال مادي بدوام كامل. موثوق وفعال من حيث التكلفة وجاهز على الفور.',
       includes: lang === 'en' ? ['Professional Baghdad address', 'Mail handling & forwarding', 'Call answering services', 'Meeting room access', 'On-demand workspace', 'Business registration address'] : ['عنوان احترافي في بغداد', 'معالجة وإعادة توجيه البريد', 'خدمات الرد على المكالمات', 'الوصول إلى غرف الاجتماعات', 'مساحة عمل عند الطلب', 'عنوان تسجيل الشركة'],
-      suitable: lang === 'en' ? 'Companies requiring a professional Baghdad address without full-time physical space' : 'الشركات التي تتطلب عنواناً احترافياً في بغداد دون مساحة مادية بدوام كامل'
+      suitable: lang === 'en' ? 'Companies requiring a professional Baghdad address without full-time physical space' : 'الشركات التي تتطلب عنواناً احترافياً في بغداد دون مساحة مادية بدوام كامل',
+      image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80'
     },
     { 
       icon: Layout, title: lang === 'en' ? 'Meeting Rooms' : 'قاعات الاجتماعات', 
       desc: lang === 'en' ? 'Professional, fully equipped meeting and collaboration spaces available on demand. Ideal for client presentations, team sessions, and business gatherings.' : 'مساحات اجتماعات وتعاون احترافية مجهزة بالكامل متاحة عند الطلب. مثالية لعروض العملاء وجلسات الفريق والتجمعات التجارية.',
       includes: lang === 'en' ? ['Professional AV equipment', 'Flexible hourly booking', 'Reception & hosting support', 'High-speed connectivity', 'Refreshment service', 'Whiteboard & presentation tools'] : ['معدات صوتية ومرئية احترافية', 'حجز مرن بالساعة', 'استقبال ودعم استضافة', 'اتصال عالي السرعة', 'خدمة المرطبات', 'سبورة وأدوات عرض'],
-      suitable: lang === 'en' ? 'Teams, independent professionals, and visiting executives' : 'الفرق والمهنيين المستقلين والمديرين التنفيذيين الزائرين'
+      suitable: lang === 'en' ? 'Teams, independent professionals, and visiting executives' : 'الفرق والمهنيين المستقلين والمديرين التنفيذيين الزائرين',
+      image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80'
     },
     { 
       icon: Wrench, title: lang === 'en' ? 'Custom Solutions' : 'حلول مخصصة', 
       desc: lang === 'en' ? 'Bespoke, unserviced office space for tenants who prefer to configure and operate their environment independently. Full control within a professional setting.' : 'مساحة مكتبية مخصصة وغير مخدومة للمستأجرين الذين يفضلون تكوين وتشغيل بيئتهم بشكل مستقل. تحكم كامل داخل بيئة احترافية.',
       includes: lang === 'en' ? ['Raw professional space', 'Fully customisable layout', 'Building services included', 'High-speed internet', 'Secure building access', 'Flexible lease terms'] : ['مساحة احترافية خام', 'تصميم قابل للتخصيص بالكامل', 'تشمل خدمات المبنى', 'إنترنت عالي السرعة', 'وصول آمن للمبنى', 'شروط إيجار مرنة'],
-      suitable: lang === 'en' ? 'Established tenants, operators, and businesses with specific setup requirements' : 'المستأجرون الراسخون والمشغلون والشركات ذات المتطلبات المحددة'
+      suitable: lang === 'en' ? 'Established tenants, operators, and businesses with specific setup requirements' : 'المستأجرون الراسخون والمشغلون والشركات ذات المتطلبات المحددة',
+      image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80'
     },
+  ];
+
+  const clients = [
+    { name: 'Uber', logo: 'https://logo.clearbit.com/uber.com' },
+    { name: 'Careem', logo: 'https://logo.clearbit.com/careem.com' },
+    { name: 'Al Majal', logo: 'https://logo.clearbit.com/almajal.com' },
+    { name: 'Abwaab', logo: 'https://logo.clearbit.com/abwaab.com' },
+    { name: 'ABS', logo: 'https://logo.clearbit.com/abs.com' },
+    { name: 'Hyundai', logo: 'https://logo.clearbit.com/hyundai.com' },
+    { name: 'Orderii', logo: 'https://logo.clearbit.com/orderii.com' },
+    { name: 'Ameena', logo: 'https://logo.clearbit.com/ameena.com' },
   ];
 
   const galleryImages = [
@@ -1004,7 +1021,6 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
           <span className="font-serif font-black text-xl text-white tracking-tight">WORKSPACE</span>
         </div>
         <div className="hidden lg:flex items-center space-x-6 text-sm font-medium text-stone-300">
-          <a href="#about" className="hover:text-white transition-colors">{lang === 'en' ? 'About' : 'حول'}</a>
           <a href="#workspaces" className="hover:text-white transition-colors">{lang === 'en' ? 'Workspaces' : 'مساحات العمل'}</a>
           <a href="#gallery" className="hover:text-white transition-colors">{lang === 'en' ? 'Gallery' : 'معرض الصور'}</a>
           <a href="#contact" className="hover:text-white transition-colors">{lang === 'en' ? 'Contact' : 'اتصل بنا'}</a>
@@ -1026,9 +1042,6 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
         {/* Hero Section */}
         <section className="relative py-24 px-4 text-center border-b border-white/5 bg-[#0A0908]">
           <div className="max-w-4xl mx-auto animate-fade-in-up">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-bold tracking-[0.2em] uppercase text-[#E59866] mb-6">
-              PREMIUM OFFICES & WORKSPACES — BAGHDAD
-            </span>
             <h1 className="text-4xl md:text-6xl font-serif font-black text-white mb-6 leading-tight">
               Flexible Office Solutions for <br />
               <span className="text-[#C85228] italic">Businesses of Every Size.</span>
@@ -1036,54 +1049,84 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
             <p className="text-base md:text-lg text-stone-400 font-light leading-relaxed max-w-2xl mx-auto mb-10">
               Private offices, serviced offices, enterprise suites, virtual offices, meeting rooms, and custom solutions — for businesses ranging from single professionals to major corporate teams.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="#contact" className="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-stone-900 font-bold text-sm tracking-wide uppercase transition-all shadow-xl hover:bg-stone-200 flex items-center justify-center">
-                Book a Viewing
-              </a>
-              <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-sm tracking-wide uppercase transition-all shadow-xl flex items-center justify-center space-x-2">
-                <MessageCircle size={18} />
-                <span>WhatsApp Us</span>
-              </a>
-            </div>
           </div>
         </section>
 
-        {/* Workspaces Grid */}
+        {/* Client Marquee */}
+        <section className="py-12 bg-[#12100F] border-b border-white/5 overflow-hidden relative">
+          <p className="text-center text-[10px] font-bold tracking-[0.2em] uppercase text-stone-500 mb-8">
+            Trusted by Leading Companies
+          </p>
+          <div className="absolute top-0 bottom-0 left-0 w-24 md:w-48 bg-gradient-to-r from-[#12100F] to-transparent z-10 pointer-events-none" />
+          <div className="absolute top-0 bottom-0 right-0 w-24 md:w-48 bg-gradient-to-l from-[#12100F] to-transparent z-10 pointer-events-none" />
+          <div className="animate-marquee items-center">
+            {[...clients, ...clients].map((client, i) => (
+              <div key={i} className="mx-4 sm:mx-6 flex-shrink-0 w-32 md:w-40 h-20 bg-white rounded-2xl flex items-center justify-center p-4 shadow-sm border border-white/10 cursor-pointer group">
+                <img 
+                  src={client.logo} 
+                  alt={client.name} 
+                  className="w-full h-full object-contain filter grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" 
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                    const parent = (e.target as HTMLImageElement).parentElement;
+                    if (parent && !parent.querySelector('.fallback-text')) {
+                      const span = document.createElement('span');
+                      span.className = 'fallback-text text-stone-900 font-bold text-sm tracking-wider uppercase';
+                      span.innerText = client.name;
+                      parent.appendChild(span);
+                    }
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Workspaces Grid (Merged Image + Text) */}
         <section id="workspaces" className="py-24 px-4 md:px-12 max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#C85228]">OUR WORKSPACES</span>
             <h2 className="text-3xl md:text-5xl font-serif font-black text-white mt-2 mb-4">Solutions for Every Stage and Scale</h2>
-            <p className="text-sm text-stone-400 max-w-2xl mx-auto">From virtual offices and private suites to enterprise floors and on-demand meeting rooms — WorkSpace supports businesses at every stage and every scale.</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {solutions.map((sol, i) => (
-              <div key={i} className="bg-[#1A1817] rounded-3xl p-8 border border-white/5 hover:border-[#C85228]/40 transition-all duration-300 flex flex-col animate-fade-in-up" style={{ animationDelay: `${i * 100}ms` }}>
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#252220] flex items-center justify-center text-[#C85228]">
-                    <sol.icon size={20} />
+              <div key={i} className="group bg-[#1A1817] rounded-3xl overflow-hidden border border-white/10 hover:border-[#C85228]/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(200,82,40,0.2)] flex flex-col animate-fade-in-up" style={{ animationDelay: `${i * 100}ms` }}>
+                
+                {/* Image Header */}
+                <div className="relative h-48 overflow-hidden">
+                  <img src={sol.image} alt={sol.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 filter brightness-[0.6] group-hover:brightness-[0.8]" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1A1817] via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-6 flex items-center space-x-3">
+                    <div className="w-10 h-10 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-[#C85228]">
+                      <sol.icon size={20} />
+                    </div>
+                    <h3 className="font-serif font-bold text-2xl text-white drop-shadow-md">{sol.title}</h3>
                   </div>
-                  <h3 className="font-serif font-bold text-xl text-white">{sol.title}</h3>
                 </div>
-                <p className="text-xs text-stone-400 mb-6 flex-grow">{sol.desc}</p>
-                
-                <div className="mb-6">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#C85228] mb-3 block">WHAT'S INCLUDED</span>
-                  <ul className="space-y-2">
-                    {sol.includes.map((inc, j) => (
-                      <li key={j} className="flex items-start space-x-2 text-[11px] text-stone-300">
-                        <CheckCircle2 size={12} className="text-[#C85228] mt-0.5 shrink-0" />
-                        <span>{inc}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <div className="pt-4 border-t border-white/5 mt-auto">
-                  <p className="text-[10px] text-stone-500 mb-3 leading-relaxed"><span className="font-bold text-stone-400">Suitable for:</span> {sol.suitable}</p>
-                  <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`I am interested in ${sol.title}`)}`} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-white hover:text-[#C85228] transition-colors flex items-center">
-                    Discuss Your Requirement <ArrowUpRight size={14} className="ml-1" />
-                  </a>
+
+                {/* Content */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <p className="text-xs text-stone-400 mb-6 flex-grow">{sol.desc}</p>
+                  
+                  <div className="mb-6">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#C85228] mb-3 block">WHAT'S INCLUDED</span>
+                    <ul className="space-y-2">
+                      {sol.includes.map((inc, j) => (
+                        <li key={j} className="flex items-start space-x-2 text-[11px] text-stone-300">
+                          <CheckCircle2 size={12} className="text-[#C85228] mt-0.5 shrink-0" />
+                          <span>{inc}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div className="pt-4 border-t border-white/5 mt-auto">
+                    <p className="text-[10px] text-stone-500 mb-3 leading-relaxed"><span className="font-bold text-stone-400">Suitable for:</span> {sol.suitable}</p>
+                    <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`I am interested in ${sol.title}`)}`} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-white hover:text-[#C85228] transition-colors flex items-center">
+                      Discuss Your Requirement <ArrowUpRight size={14} className="ml-1" />
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
@@ -1096,18 +1139,10 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
             <div className="text-center mb-16">
               <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#C85228]">GALLERY</span>
               <h2 className="text-3xl md:text-5xl font-serif font-black text-white mt-2 mb-4">See WorkSpace in Detail</h2>
-              <p className="text-sm text-stone-400 max-w-2xl mx-auto">Premium architecture, professional interiors, and a workspace environment designed for serious businesses.</p>
             </div>
-            
-            {/* Bento Grid Layout for 5 Images */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {galleryImages.map((img, i) => (
-                <div 
-                  key={i} 
-                  className={`group relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl h-64 md:h-80 ${
-                    i === 0 ? 'md:col-span-2 md:h-96' : '' // Make first image larger
-                  }`}
-                >
+                <div key={i} className={`group relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl h-64 md:h-80 ${i === 0 ? 'md:col-span-2 md:h-96' : ''}`}>
                   <img src={img.src} alt={img.label} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 filter brightness-[0.7] group-hover:brightness-[0.9]" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
                   <span className="absolute bottom-6 left-6 text-sm font-bold text-white tracking-wide">{img.label}</span>
@@ -1117,16 +1152,12 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
           </div>
         </section>
 
-        {/* Contact Form Section */}
+        {/* Contact Section */}
         <section id="contact" className="py-24 px-4 md:px-12 max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#C85228]">GET IN TOUCH</span>
             <h2 className="text-3xl md:text-5xl font-serif font-black text-white mt-2">Ready to Find Your Workspace?</h2>
-            <p className="text-sm text-stone-400 mt-4 max-w-2xl mx-auto">Reach out directly via WhatsApp or phone, or submit an enquiry and we'll be in touch. Site visits can be arranged by appointment.</p>
           </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Contact Cards */}
             <div className="lg:col-span-1 space-y-4">
               <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="flex items-center space-x-4 p-6 rounded-2xl bg-[#25D366] text-stone-900 hover:bg-[#20ba5a] transition-colors">
                 <MessageCircle size={24} />
@@ -1156,8 +1187,6 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
                 </div>
               </div>
             </div>
-
-            {/* Form */}
             <div className="lg:col-span-2 bg-[#1A1817] p-8 rounded-3xl border border-white/10">
               {formStatus ? (
                 <div className="h-full flex flex-col items-center justify-center text-center py-12">
@@ -1197,7 +1226,7 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
                   </div>
                   <div>
                     <label className="text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-2 block">Tell Us More</label>
-                    <textarea rows={4} className="w-full bg-[#12100F] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#C85228] resize-none" placeholder="Describe your workspace requirements — team size, preferred format, move-in timeline..."></textarea>
+                    <textarea rows={4} className="w-full bg-[#12100F] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#C85228] resize-none" placeholder="Describe your workspace requirements..."></textarea>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3 pt-2">
                     <button type="submit" className="flex-1 bg-white hover:bg-stone-200 text-stone-900 font-bold text-xs tracking-wider uppercase py-4 rounded-xl transition-colors">
