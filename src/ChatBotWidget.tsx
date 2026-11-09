@@ -98,7 +98,7 @@ export default function ChatBotWidget({ lang }: ChatBotWidgetProps) {
       {isOpen && (
         <section
           aria-label={text.title}
-          className="fixed bottom-24 right-4 z-[90] flex h-[min(32rem,70vh)] w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#181615] shadow-2xl sm:right-6 sm:w-96"
+          className="fixed bottom-28 right-4 z-[90] flex h-[min(32rem,70vh)] w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#181615] shadow-2xl sm:right-6 sm:w-96"
         >
           <header className="flex items-center justify-between border-b border-white/10 bg-[#211e1c] px-4 py-3">
             <h2 className="font-semibold text-white">{text.title}</h2>
@@ -163,7 +163,7 @@ export default function ChatBotWidget({ lang }: ChatBotWidgetProps) {
           onClick={() => setIsOpen(true)}
           aria-label={text.open}
           aria-expanded={isOpen}
-          className="fixed bottom-24 right-6 z-[90] flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-[#C85228] text-white shadow-xl transition-transform hover:scale-105"
+          className="fixed bottom-28 right-6 z-[90] flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-[#C85228] text-white shadow-xl transition-transform hover:scale-105"
         >
           <MessageCircle size={23} />
         </button>

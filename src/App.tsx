@@ -457,16 +457,27 @@ const GatewayPage = ({ onSelectWorld, lang, setLang }: { onSelectWorld: (id: Wor
               <div className="absolute top-6 right-6 md:top-10 md:right-10 z-10 pointer-events-none">
                 <span className={`font-serif text-5xl md:text-7xl font-black transition-opacity duration-500 ${isHovered ? 'text-white/30' : 'text-white/10'}`}>{world.code}</span>
               </div>
-              <div className="relative z-20 flex flex-col space-y-4 max-w-lg">
-                <div className="flex items-center space-x-2">
-                  <span className="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-white/10 backdrop-blur-md border border-white/20 text-white animate-float">{world.badge}</span>
+              <div className="relative z-20 flex flex-col max-w-lg pb-4">
+                <div className="flex items-center space-x-2 mb-3">
+                  <span className="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-white/10 backdrop-blur-md border border-white/20 text-white animate-float">
+                    {world.badge}
+                  </span>
                 </div>
+
+                <div className="mb-4">
+                  <div className="text-xs tracking-[0.25em] uppercase text-[#E59866] font-bold mb-1.5">
+                    {world.tagline}
+                  </div>
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-black tracking-tight text-white leading-[1.1]">
+                    {world.title}
+                  </h2>
+                </div>
+
+                <p className={`text-xs md:text-sm text-stone-300 font-light leading-relaxed line-clamp-2 transition-all duration-500 mb-6 ${isHovered ? 'opacity-100 max-h-20' : 'opacity-80 max-h-12'}`}>
+                  {world.desc}
+                </p>
+
                 <div>
-                  <div className="text-xs tracking-[0.25em] uppercase text-[#E59866] font-bold mb-1">{world.tagline}</div>
-                  <h2 className="text-3xl md:text-5xl font-serif font-black tracking-tight text-white leading-tight">{world.title}</h2>
-                </div>
-                <p className={`text-xs md:text-sm text-stone-300 font-light leading-relaxed line-clamp-2 transition-all duration-500 ${isHovered ? 'opacity-100 max-h-20' : 'opacity-80 max-h-12'}`}>{world.desc}</p>
-                <div className="pt-2">
                   <span className={`inline-flex px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase border transition-all duration-300 items-center space-x-2 ${isHovered ? 'bg-white text-stone-900 border-white shadow-xl translate-x-1' : 'bg-black/40 text-white border-white/40 backdrop-blur-sm'}`}>
                     <span>{world.cta}</span><ArrowUpRight size={14} />
                   </span>
@@ -999,11 +1010,11 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
   ];
 
   const galleryImages = [
-    { src: '/exterior.jpg', label: lang === 'en' ? 'Exterior View' : 'المنظر الخارجي' },
-    { src: '/interior.jpg', label: lang === 'en' ? 'Interior Finish' : 'التشطيب الداخلي' },
-    { src: '/identity.jpg', label: lang === 'en' ? 'Building Identity' : 'هوية المبنى' },
-    { src: '/collaboration.jpg', label: lang === 'en' ? 'Collaboration Space' : 'مساحة التعاون' },
-    { src: '/workspace.jpg', label: lang === 'en' ? 'Premium Workspace' : 'مساحة عمل متميزة' }
+    { src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80', label: lang === 'en' ? 'Building Exterior' : 'المبنى من الخارج' },
+    { src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80', label: lang === 'en' ? 'Interior Finish' : 'التشطيب الداخلي' },
+    { src: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80', label: lang === 'en' ? 'Building Identity' : 'هوية المبنى' },
+    { src: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80', label: lang === 'en' ? 'Collaboration Space' : 'مساحة التعاون' },
+    { src: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80', label: lang === 'en' ? 'Premium Workspace' : 'مساحة عمل متميزة' }
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
