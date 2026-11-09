@@ -4,7 +4,7 @@ import {
   Coffee, CalendarPlus, MessageCircle, Briefcase, Sparkles,
   MapPin, Phone, ShoppingBag, Plus, Minus, X, Flame,
   ArrowLeft, ArrowUpRight, ChevronLeft, CheckCircle2,
-  Building2, Globe, Layout, Wrench, Users, Wifi, Zap, Bath, ShieldCheck
+  Building2, Globe, Layout, Wrench, Users, Wifi, Zap, Bath, ShieldCheck, Search
 } from 'lucide-react';
 
 // ─────────────────────────────────────────────────────────────
@@ -96,7 +96,7 @@ type MenuItem = {
   tags: string[];
 };
 
-type CartItem = MenuItem & { quantity: number };
+type CartItem = (MenuItem | PadelProduct) & { quantity: number; selectedSize?: string };
 
 type Day = {
   full: Date;
@@ -403,17 +403,19 @@ type PadelProduct = {
   desc: string;
   brand: string;
   specs: string;
+  stock: 'In Stock' | 'Low Stock' | 'Best Seller';
+  sizes?: string[];
 };
 
 const PADEL_PRODUCTS: PadelProduct[] = [
-  { id: 'p1', name: 'Head Speed Pro Racket', category: 'Rackets', price: 180000, image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80', desc: 'Precision and power. The official racket of the Padel Club Baghdad pros.', brand: 'HEAD', specs: 'Weight: 360g | Shape: Teardrop' },
-  { id: 'p2', name: 'Babolat Technical Viper', category: 'Rackets', price: 210000, image: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=800&q=80', desc: 'Diamond shape for maximum smash power. Lightweight carbon fiber.', brand: 'BABOLAT', specs: 'Weight: 365g | Shape: Diamond' },
-  { id: 'p3', name: 'Bullpadel Pro Padel Balls', category: 'Balls', price: 15000, image: 'https://images.unsplash.com/photo-1611251135345-18c56206b863?auto=format&fit=crop&w=800&q=80', desc: 'Tube of 3 high-altitude pressure balls for tournament play.', brand: 'BULLPADEL', specs: 'Speed: Fast | Pack: 3 Balls' },
-  { id: 'p4', name: 'Wilson Padel Bag', category: 'Accessories', price: 85000, image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80', desc: 'Thermal insulated racket compartment and shoe pocket.', brand: 'WILSON', specs: 'Capacity: 2 Rackets | Color: Black' },
-  { id: 'p5', name: 'Overgrip Pack (3x)', category: 'Accessories', price: 12000, image: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=800&q=80', desc: 'Tacky feel for maximum control and sweat absorption.', brand: 'HEAD', specs: 'Pack: 3 Grips | Color: White' },
-  { id: 'p6', name: 'WorkSpace Padel Tee', category: 'Apparel', price: 35000, image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80', desc: 'Breathable performance fabric with the Padel Club Baghdad logo.', brand: 'WORKSPACE', specs: 'Sizes: S, M, L, XL | 100% Polyester' },
-  { id: 'p7', name: 'Adidas Metalbone Racket', category: 'Rackets', price: 230000, image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80', desc: 'The weapon of choice for professional players seeking ultimate power.', brand: 'ADIDAS', specs: 'Weight: 370g | Shape: Diamond' },
-  { id: 'p8', name: 'Nox Luxury Padel Cap', category: 'Apparel', price: 25000, image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=800&q=80', desc: 'Stay cool on the court with this moisture-wicking cap.', brand: 'NOX', specs: 'Adjustable | One Size' },
+  { id: 'p1', name: 'Head Speed Pro Racket', category: 'Rackets', price: 180000, image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80', desc: 'Precision and power. The official racket of the Padel Club Baghdad pros.', brand: 'HEAD', specs: 'Weight: 360g | Shape: Teardrop', stock: 'Best Seller' },
+  { id: 'p2', name: 'Babolat Technical Viper', category: 'Rackets', price: 210000, image: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=800&q=80', desc: 'Diamond shape for maximum smash power. Lightweight carbon fiber.', brand: 'BABOLAT', specs: 'Weight: 365g | Shape: Diamond', stock: 'In Stock' },
+  { id: 'p3', name: 'Bullpadel Pro Padel Balls', category: 'Balls', price: 15000, image: 'https://images.unsplash.com/photo-1611251135345-18c56206b863?auto=format&fit=crop&w=800&q=80', desc: 'Tube of 3 high-altitude pressure balls for tournament play.', brand: 'BULLPADEL', specs: 'Speed: Fast | Pack: 3 Balls', stock: 'In Stock' },
+  { id: 'p4', name: 'Wilson Padel Bag', category: 'Accessories', price: 85000, image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80', desc: 'Thermal insulated racket compartment and shoe pocket.', brand: 'WILSON', specs: 'Capacity: 2 Rackets | Color: Black', stock: 'Low Stock' },
+  { id: 'p5', name: 'Overgrip Pack (3x)', category: 'Accessories', price: 12000, image: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=800&q=80', desc: 'Tacky feel for maximum control and sweat absorption.', brand: 'HEAD', specs: 'Pack: 3 Grips | Color: White', stock: 'In Stock' },
+  { id: 'p6', name: 'WorkSpace Padel Tee', category: 'Apparel', price: 35000, image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80', desc: 'Breathable performance fabric with the Padel Club Baghdad logo.', brand: 'WORKSPACE', specs: 'Sizes: S, M, L, XL | 100% Polyester', stock: 'In Stock', sizes: ['S', 'M', 'L', 'XL'] },
+  { id: 'p7', name: 'Adidas Metalbone Racket', category: 'Rackets', price: 230000, image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80', desc: 'The weapon of choice for professional players seeking ultimate power.', brand: 'ADIDAS', specs: 'Weight: 370g | Shape: Diamond', stock: 'In Stock' },
+  { id: 'p8', name: 'Nox Luxury Padel Cap', category: 'Apparel', price: 25000, image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=800&q=80', desc: 'Stay cool on the court with this moisture-wicking cap.', brand: 'NOX', specs: 'Adjustable | One Size', stock: 'Low Stock' },
 ];
 
 // ─────────────────────────────────────────────────────────────
@@ -926,17 +928,22 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onBrowse }: CartD
 
   const handleCheckoutWhatsApp = () => {
     if (cart.length === 0) return;
-    const itemsList = cart.map((i) => `• ${i.name} (${i.isIced ? 'Clear Tumbler ❄' : i.isFood ? 'Bakery 🥐' : 'Paper Cup ☕'}) x${i.quantity} = ${(i.price * i.quantity).toLocaleString()} IQD`).join('\n');
-    const text = `*WorkSpace Cafe Table Order*\n-----------------------------\n📍 Hay Al-Jamia, Baghdad\n${itemsList}\n-----------------------------\n💰 *Total:* ${total.toLocaleString()} IQD\n\nPlease prepare my order!`;
+    const itemsList = cart.map((item) => {
+      const description = 'brand' in item
+        ? `${item.category}${item.selectedSize ? ` • Size ${item.selectedSize}` : ''}`
+        : item.isIced ? 'Clear Tumbler ❄' : item.isFood ? 'Bakery 🥐' : 'Paper Cup ☕';
+      return `• ${item.name} (${description}) x${item.quantity} = ${(item.price * item.quantity).toLocaleString()} IQD`;
+    }).join('\n');
+    const text = `*WorkSpace Order*\n-----------------------------\n📍 Hay Al-Jamia, Baghdad\n${itemsList}\n-----------------------------\n💰 *Total:* ${total.toLocaleString()} IQD\n\nPlease confirm my order!`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (
-    <div role="dialog" aria-modal="true" aria-label="Your cafe order" className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex justify-end animate-fade-in" onClick={onClose}>
+    <div role="dialog" aria-modal="true" aria-label="Your shopping bag" className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex justify-end animate-fade-in" onClick={onClose}>
       <div onClick={(e) => e.stopPropagation()} className="bg-[#1A1817] w-full max-w-md h-full flex flex-col justify-between p-5 md:p-6 border-l border-white/15 animate-slide-in-right">
         <div>
           <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
-            <div className="flex items-center space-x-2"><ShoppingBag size={18} className="text-[#C85228]" /><h3 className="font-serif font-bold text-xl text-white">Your Cafe Order</h3></div>
+            <div className="flex items-center space-x-2"><ShoppingBag size={18} className="text-[#C85228]" /><h3 className="font-serif font-bold text-xl text-white">Your Bag</h3></div>
             <button onClick={onClose} aria-label="Close cart" className="p-2 rounded-full bg-white/5 text-stone-400 hover:text-white"><X size={16} /></button>
           </div>
           {cart.length === 0 ? (
@@ -952,7 +959,11 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onBrowse }: CartD
                 <div key={item.id} className="p-3.5 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="text-xs font-bold text-white truncate">{item.name}</div>
-                    <div className="text-[10px] text-stone-400">{item.isIced ? '❄ Clear Tumbler' : item.isFood ? '🥐 Bakery' : '☕ Paper Cup'}</div>
+                    <div className="text-[10px] text-stone-400">
+                      {'brand' in item
+                        ? `${item.category}${item.selectedSize ? ` • Size ${item.selectedSize}` : ''}`
+                        : item.isIced ? '❄ Clear Tumbler' : item.isFood ? '🥐 Bakery' : '☕ Paper Cup'}
+                    </div>
                     <div className="text-xs font-mono font-semibold text-[#E59866] mt-1">{(item.price * item.quantity).toLocaleString()} IQD</div>
                   </div>
                   <div className="flex items-center space-x-1 bg-black/40 rounded-xl p-1 border border-white/10">
@@ -983,6 +994,7 @@ const CartDrawer = ({ isOpen, onClose, cart, onUpdateQuantity, onBrowse }: CartD
 // ─────────────────────────────────────────────────────────────
 const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, lang: 'en' | 'ar', setLang: (lang: 'en' | 'ar') => void }) => {
   const [formStatus, setFormStatus] = useState('');
+  const [honeypot, setHoneypot] = useState('');
 
   const solutions = [
     { 
@@ -1050,6 +1062,19 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (honeypot.trim()) return;
+
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const phone = String(formData.get('phone') ?? '');
+    const email = String(formData.get('email') ?? '');
+    if (!/^[0-9+() -]*$/.test(phone)) {
+      setFormStatus(lang === 'en' ? 'Please enter a valid phone number.' : 'يرجى إدخال رقم هاتف صحيح.');
+      return;
+    }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setFormStatus(lang === 'en' ? 'Please enter a valid email address.' : 'يرجى إدخال بريد إلكتروني صحيح.');
+      return;
+    }
     setFormStatus(lang === 'en' ? 'Enquiry received! We will contact you shortly.' : 'تم استلام الاستفسار! سنتصل بك قريباً.');
   };
 
@@ -1284,24 +1309,28 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
+                    <label htmlFor="contact-website">Leave this field empty</label>
+                    <input id="contact-website" type="text" name="website" value={honeypot} onChange={(event) => setHoneypot(event.target.value)} tabIndex={-1} autoComplete="off" />
+                  </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-2 block">Full Name *</label>
-                      <input required type="text" className="w-full bg-[#12100F] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#C85228]" placeholder="Your name" />
+                      <input required name="name" type="text" autoComplete="name" className="w-full bg-[#12100F] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#C85228]" placeholder="Your name" />
                     </div>
                     <div>
                       <label className="text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-2 block">Company</label>
-                      <input type="text" className="w-full bg-[#12100F] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#C85228]" placeholder="Company name" />
+                      <input name="company" type="text" autoComplete="organization" className="w-full bg-[#12100F] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#C85228]" placeholder="Company name" />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-2 block">Phone Number</label>
-                      <input type="tel" className="w-full bg-[#12100F] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#C85228]" placeholder="+964 7XX XXX XXXX" />
+                      <input name="phone" type="tel" inputMode="tel" pattern={'[0-9+\\(\\)\\- ]*'} title="Use digits, spaces, +, - or parentheses." autoComplete="tel" className="w-full bg-[#12100F] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#C85228]" placeholder="+964 7XX XXX XXXX" />
                     </div>
                     <div>
                       <label className="text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-2 block">Email Address</label>
-                      <input type="email" className="w-full bg-[#12100F] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#C85228]" placeholder="your@email.com" />
+                      <input name="email" type="email" autoComplete="email" className="w-full bg-[#12100F] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#C85228]" placeholder="your@email.com" />
                     </div>
                   </div>
                   <div>
@@ -1372,13 +1401,49 @@ const FloatingWhatsApp = () => (
   </a>
 );
 
-const PadelShopPage = ({ onBack, onNavigateReservation, lang }: { onBack: () => void; onNavigateReservation: () => void; lang: Language }) => {
+const PadelShopPage = ({ onBack, onNavigateReservation, lang, cart, onAddToCart, onOpenCart }: {
+  onBack: () => void;
+  onNavigateReservation: () => void;
+  lang: Language;
+  cart: CartItem[];
+  onAddToCart: (item: PadelProduct, qty: number, selectedSize?: string) => void;
+  onOpenCart: () => void;
+}) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProduct, setSelectedProduct] = useState<PadelProduct | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [quantity, setQuantity] = useState(1);
+  const [search, setSearch] = useState('');
+  const [sortBy, setSortBy] = useState<'featured' | 'name' | 'price-asc' | 'price-desc'>('featured');
   const categories = ['All', 'Rackets', 'Balls', 'Accessories', 'Apparel'];
-  const filteredProducts = selectedCategory === 'All'
-    ? PADEL_PRODUCTS
-    : PADEL_PRODUCTS.filter((product) => product.category === selectedCategory);
+  const filteredProducts = PADEL_PRODUCTS
+    .filter((product) => selectedCategory === 'All' || product.category === selectedCategory)
+    .filter((product) => `${product.name} ${product.brand} ${product.category}`.toLowerCase().includes(search.trim().toLowerCase()))
+    .sort((a, b) => {
+      if (sortBy === 'name') return a.name.localeCompare(b.name);
+      if (sortBy === 'price-asc') return a.price - b.price;
+      if (sortBy === 'price-desc') return b.price - a.price;
+      return PADEL_PRODUCTS.indexOf(a) - PADEL_PRODUCTS.indexOf(b);
+    });
+  const cartTotalCount = cart.reduce((total, item) => total + item.quantity, 0);
+  const relatedProducts = selectedProduct
+    ? PADEL_PRODUCTS.filter((product) => product.id !== selectedProduct.id && product.category === selectedProduct.category).slice(0, 2)
+    : [];
+  const relatedFallback = selectedProduct && relatedProducts.length < 2
+    ? PADEL_PRODUCTS.filter((product) => product.id !== selectedProduct.id && !relatedProducts.some((related) => related.id === product.id)).slice(0, 2 - relatedProducts.length)
+    : [];
+  const suggestions = [...relatedProducts, ...relatedFallback];
+
+  const selectProduct = (product: PadelProduct) => {
+    setSelectedProduct(product);
+    setSelectedSize(null);
+    setQuantity(1);
+  };
+
+  const canOrderSelectedProduct = Boolean(selectedProduct && (!selectedProduct.sizes || selectedSize));
+  const selectedOrderMessage = selectedProduct
+    ? `I want to order: ${quantity}x ${selectedProduct.name}${selectedSize ? ` (Size: ${selectedSize})` : ''} (${(selectedProduct.price * quantity).toLocaleString()} IQD)`
+    : '';
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -1412,6 +1477,10 @@ const PadelShopPage = ({ onBack, onNavigateReservation, lang }: { onBack: () => 
           <CalendarPlus size={15} />
           <span className="hidden sm:inline">{lang === 'en' ? 'Book Court' : 'احجز الملعب'}</span>
         </button>
+        <button onClick={onOpenCart} aria-label={`Open shopping bag (${cartTotalCount} items)`} className="relative p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors">
+          <ShoppingBag size={18} />
+          {cartTotalCount > 0 && <span className="absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-[#C85228] text-[10px] font-bold flex items-center justify-center">{cartTotalCount}</span>}
+        </button>
       </header>
 
       <div className="relative h-64 md:h-80 w-full overflow-hidden flex items-center justify-center">
@@ -1426,6 +1495,21 @@ const PadelShopPage = ({ onBack, onNavigateReservation, lang }: { onBack: () => 
       </div>
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-12 py-8">
+        <div className="mb-6 grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-3">
+          <label className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 text-stone-400 focus-within:border-[#C85228]">
+            <Search size={17} />
+            <input value={search} onChange={(event) => setSearch(event.target.value)} type="search" placeholder={lang === 'en' ? 'Search gear...' : 'ابحث عن المعدات...'} aria-label="Search Padel gear" className="w-full bg-transparent py-3 text-sm text-white outline-none placeholder:text-stone-500" />
+          </label>
+          <label className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 text-xs text-stone-400">
+            <span>{lang === 'en' ? 'Sort by' : 'ترتيب'}</span>
+            <select value={sortBy} onChange={(event) => setSortBy(event.target.value as typeof sortBy)} aria-label="Sort products" className="bg-transparent py-3 text-sm text-white outline-none [&>option]:bg-[#1A1817]">
+              <option value="featured">{lang === 'en' ? 'Featured' : 'مميز'}</option>
+              <option value="name">{lang === 'en' ? 'Name' : 'الاسم'}</option>
+              <option value="price-asc">{lang === 'en' ? 'Price: low to high' : 'السعر: الأقل أولاً'}</option>
+              <option value="price-desc">{lang === 'en' ? 'Price: high to low' : 'السعر: الأعلى أولاً'}</option>
+            </select>
+          </label>
+        </div>
         <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-6">
           {categories.map((category) => (
             <button
@@ -1444,7 +1528,7 @@ const PadelShopPage = ({ onBack, onNavigateReservation, lang }: { onBack: () => 
             <button
               key={item.id}
               type="button"
-              onClick={() => setSelectedProduct(item)}
+              onClick={() => selectProduct(item)}
               aria-label={`View ${item.name} details`}
               className="group text-left bg-[#1A1817] rounded-[2rem] overflow-hidden border border-white/5 hover:border-[#C85228]/40 transition-all duration-300 shadow-xl flex flex-col justify-between cursor-pointer"
             >
@@ -1458,6 +1542,7 @@ const PadelShopPage = ({ onBack, onNavigateReservation, lang }: { onBack: () => 
                   <div className="text-[10px] font-bold text-stone-500 mb-1">{item.brand}</div>
                   <h2 className="font-serif font-bold text-lg text-white mb-1 line-clamp-1">{item.name}</h2>
                   <p className="text-xs text-stone-400 line-clamp-2">{item.desc}</p>
+                  <span className={`mt-2 inline-flex rounded-full px-2 py-1 text-[9px] font-bold uppercase tracking-wider ${item.stock === 'Low Stock' ? 'bg-amber-500/10 text-amber-300' : item.stock === 'Best Seller' ? 'bg-[#C85228]/15 text-[#E59866]' : 'bg-emerald-500/10 text-emerald-300'}`}>{item.stock}</span>
                 </div>
                 <div className="pt-4 mt-4 border-t border-white/5 flex items-center justify-between gap-2">
                   <span className="font-mono font-bold text-sm text-[#E59866]">{item.price.toLocaleString()} IQD</span>
@@ -1467,6 +1552,9 @@ const PadelShopPage = ({ onBack, onNavigateReservation, lang }: { onBack: () => 
             </button>
           ))}
         </div>
+        {filteredProducts.length === 0 && (
+          <p className="py-16 text-center text-sm text-stone-400">{lang === 'en' ? 'No gear matches your search.' : 'لا توجد معدات مطابقة لبحثك.'}</p>
+        )}
       </main>
 
       {selectedProduct && (
@@ -1490,18 +1578,72 @@ const PadelShopPage = ({ onBack, onNavigateReservation, lang }: { onBack: () => 
                 <h2 className="font-serif font-black text-2xl text-white mb-2">{selectedProduct.name}</h2>
                 <p className="text-sm text-stone-300 mb-4">{selectedProduct.desc}</p>
                 <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs text-stone-400 font-mono mb-6">{selectedProduct.specs}</div>
+                <p className={`mb-5 text-xs font-bold ${selectedProduct.stock === 'Low Stock' ? 'text-amber-300' : selectedProduct.stock === 'Best Seller' ? 'text-[#E59866]' : 'text-emerald-300'}`}>{selectedProduct.stock}</p>
+                {selectedProduct.sizes && (
+                  <fieldset className="mb-5">
+                    <legend className="mb-2 text-xs font-bold text-stone-300">{lang === 'en' ? 'Select size' : 'اختر المقاس'} *</legend>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProduct.sizes.map((size) => (
+                        <button key={size} type="button" onClick={() => setSelectedSize(size)} aria-pressed={selectedSize === size} className={`min-w-11 rounded-lg border px-3 py-2 text-xs font-bold transition-colors ${selectedSize === size ? 'border-[#C85228] bg-[#C85228] text-white' : 'border-white/10 bg-white/5 text-stone-300 hover:bg-white/10'}`}>
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </fieldset>
+                )}
+                <div className="mb-5 flex items-center justify-between">
+                  <span className="text-xs font-bold text-stone-300">{lang === 'en' ? 'Quantity' : 'الكمية'}</span>
+                  <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-1">
+                    <button type="button" onClick={() => setQuantity((current) => Math.max(1, current - 1))} aria-label="Decrease quantity" className="rounded-lg p-2 text-stone-300 hover:bg-white/10 hover:text-white"><Minus size={14} /></button>
+                    <span className="w-6 text-center text-sm font-bold text-white">{quantity}</span>
+                    <button type="button" onClick={() => setQuantity((current) => Math.min(20, current + 1))} aria-label="Increase quantity" className="rounded-lg p-2 text-stone-300 hover:bg-white/10 hover:text-white"><Plus size={14} /></button>
+                  </div>
+                </div>
               </div>
               <div>
-                <div className="text-2xl font-mono font-bold text-[#E59866] mb-4">{selectedProduct.price.toLocaleString()} IQD</div>
+                <div className="text-2xl font-mono font-bold text-[#E59866] mb-4">{(selectedProduct.price * quantity).toLocaleString()} IQD</div>
+                <button
+                  type="button"
+                  disabled={!canOrderSelectedProduct}
+                  onClick={() => {
+                    if (!canOrderSelectedProduct) return;
+                    onAddToCart(selectedProduct, quantity, selectedSize ?? undefined);
+                    setSelectedProduct(null);
+                    onOpenCart();
+                  }}
+                  className="mb-3 w-full rounded-xl bg-[#C85228] py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-xl transition-all hover:bg-[#d95d31] disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <ShoppingBag size={17} className="mr-2 inline" />
+                  {lang === 'en' ? 'Add to Bag' : 'أضف إلى الحقيبة'}
+                </button>
                 <a
-                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`I want to order: ${selectedProduct.name} (${selectedProduct.price.toLocaleString()} IQD)`)}`}
+                  href={canOrderSelectedProduct ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(selectedOrderMessage)}` : undefined}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-4 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-stone-950 font-bold text-sm tracking-wider uppercase transition-all shadow-xl flex items-center justify-center gap-2"
+                  aria-disabled={!canOrderSelectedProduct}
+                  onClick={(event) => { if (!canOrderSelectedProduct) event.preventDefault(); }}
+                  className={`w-full py-4 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-stone-950 font-bold text-sm tracking-wider uppercase transition-all shadow-xl flex items-center justify-center gap-2 ${!canOrderSelectedProduct ? 'pointer-events-none opacity-40' : ''}`}
                 >
                   <MessageCircle size={18} />
                   <span>{lang === 'en' ? 'Order via WhatsApp' : 'اطلب عبر واتساب'}</span>
                 </a>
+                {selectedProduct.sizes && !selectedSize && <p className="mt-2 text-center text-xs text-amber-300">{lang === 'en' ? 'Choose a size to order this product.' : 'اختر المقاس لإتمام الطلب.'}</p>}
+                {suggestions.length > 0 && (
+                  <div className="mt-6 border-t border-white/10 pt-5">
+                    <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-stone-300">{lang === 'en' ? 'You may also like' : 'قد يعجبك أيضاً'}</h3>
+                    <div className="grid grid-cols-2 gap-3">
+                      {suggestions.map((product) => (
+                        <button key={product.id} type="button" onClick={() => selectProduct(product)} className="flex min-w-0 items-center gap-2 rounded-xl border border-white/10 bg-white/5 p-2 text-left transition-colors hover:bg-white/10">
+                          <img src={product.image} alt="" className="h-12 w-12 shrink-0 rounded-lg object-cover" />
+                          <span className="min-w-0">
+                            <span className="block truncate text-[10px] font-bold text-white">{product.name}</span>
+                            <span className="text-[10px] text-[#E59866]">{product.price.toLocaleString()} IQD</span>
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </section>
@@ -1531,13 +1673,14 @@ export default function App() {
     try { localStorage.setItem('workspace_cart', JSON.stringify(cart)); } catch {}
   }, [cart]);
 
-  const handleAddToCart = (item: MenuItem, qty = 1) => {
+  const handleAddToCart = (item: MenuItem | PadelProduct, qty = 1, selectedSize?: string) => {
     setCart((prev) => {
-      const existing = prev.find((i) => i.id === item.id);
+      const cartId = 'brand' in item ? `padel-${item.id}${selectedSize ? `-${selectedSize}` : ''}` : item.id;
+      const existing = prev.find((cartItem) => cartItem.id === cartId);
       if (existing) {
-        return prev.map((i) => i.id === item.id ? { ...i, quantity: i.quantity + qty } : i);
+        return prev.map((cartItem) => cartItem.id === cartId ? { ...cartItem, quantity: cartItem.quantity + qty } : cartItem);
       }
-      return [...prev, { ...item, quantity: qty }];
+      return [...prev, { ...item, id: cartId, quantity: qty, ...(selectedSize ? { selectedSize } : {}) }];
     });
   };
 
@@ -1559,7 +1702,7 @@ export default function App() {
       {currentPage === 'menu' && <MenuPage onBack={() => setCurrentPage('home')} onNavigateReservation={(type) => setCurrentPage(type)} cart={cart} onAddToCart={handleAddToCart} onOpenCart={() => setIsCartOpen(true)} lang={lang} setLang={setLang} />}
       {(currentPage === 'padel' || currentPage === 'meeting') && <ReservationPage type={currentPage} onBack={() => setCurrentPage('home')} onNavigateShop={() => setCurrentPage('padel-shop')} lang={lang} setLang={setLang} />}
       {currentPage === 'office' && <OfficeSolutionsPage onBack={() => setCurrentPage('home')} lang={lang} setLang={setLang} />}
-      {currentPage === 'padel-shop' && <PadelShopPage onBack={() => setCurrentPage('home')} onNavigateReservation={() => setCurrentPage('padel')} lang={lang} />}
+      {currentPage === 'padel-shop' && <PadelShopPage onBack={() => setCurrentPage('home')} onNavigateReservation={() => setCurrentPage('padel')} lang={lang} cart={cart} onAddToCart={handleAddToCart} onOpenCart={() => setIsCartOpen(true)} />}
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cart={cart} onUpdateQuantity={handleUpdateQuantity} onBrowse={() => setCurrentPage('menu')} />
       <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end space-y-4">
         <ChatBotWidget lang={lang} />

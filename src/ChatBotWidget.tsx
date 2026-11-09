@@ -10,6 +10,24 @@ type ChatBotWidgetProps = {
   lang: 'en' | 'ar';
 };
 
+const CHAT_RATE_LIMIT_KEY = 'workspace_chat_sent_timestamps';
+const CHAT_RATE_LIMIT_WINDOW_MS = 60_000;
+const CHAT_RATE_LIMIT_MAX_MESSAGES = 5;
+
+function loadRecentMessageTimestamps() {
+  try {
+    const stored: unknown = JSON.parse(localStorage.getItem(CHAT_RATE_LIMIT_KEY) ?? '[]');
+    if (!Array.isArray(stored)) return [];
+    const cutoff = Date.now() - CHAT_RATE_LIMIT_WINDOW_MS;
+    return stored.filter((timestamp): timestamp is number =>
+      typeof timestamp === 'number' && Number.isFinite(timestamp) && timestamp > cutoff
+    );
+  } catch (error) {
+    console.warn('Unable to read chat rate-limit history:', error);
+    return [];
+  }
+}
+
 const copy = {
   en: {
     title: 'WorkSpace Assistant',
@@ -20,6 +38,7 @@ const copy = {
     close: 'Close chat',
     error: 'I could not get a response right now. Please try again or contact us on WhatsApp.',
     waiting: 'Thinking...',
+    rateLimit: 'Please wait before sending another message.',
   },
   ar: {
     title: 'مساعد وورك سبيس',
@@ -30,6 +49,7 @@ const copy = {
     close: 'إغلاق المحادثة',
     error: 'تعذر الحصول على إجابة الآن. حاول مجدداً أو تواصل معنا عبر واتساب.',
     waiting: 'جارٍ التفكير...',
+    rateLimit: 'يرجى الانتظار قبل إرسال رسالة أخرى.',
   },
 };
 
@@ -39,17 +59,42 @@ export default function ChatBotWidget({ lang }: ChatBotWidgetProps) {
   const [input, setInput] = useState('');
   const [isSending, setIsSending] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [sentTimestamps, setSentTimestamps] = useState<number[]>(loadRecentMessageTimestamps);
+  const [rateLimitUntil, setRateLimitUntil] = useState(0);
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const text = copy[lang];
+  const isRateLimited = rateLimitUntil > 0;
 
   useEffect(() => {
     endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isSending]);
 
+  useEffect(() => {
+    if (!isRateLimited) return;
+    const timeout = window.setTimeout(() => setRateLimitUntil(0), Math.max(0, rateLimitUntil - Date.now()));
+    return () => window.clearTimeout(timeout);
+  }, [isRateLimited, rateLimitUntil]);
+
   const sendMessage = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const content = input.trim();
-    if (!content || isSending) return;
+    if (!content || isSending || isRateLimited) return;
+
+    const now = Date.now();
+    const recentTimestamps = sentTimestamps.filter((timestamp) => timestamp > now - CHAT_RATE_LIMIT_WINDOW_MS);
+    if (recentTimestamps.length >= CHAT_RATE_LIMIT_MAX_MESSAGES) {
+      setSentTimestamps(recentTimestamps);
+      setRateLimitUntil(recentTimestamps[0] + CHAT_RATE_LIMIT_WINDOW_MS);
+      return;
+    }
+
+    const nextTimestamps = [...recentTimestamps, now];
+    setSentTimestamps(nextTimestamps);
+    try {
+      localStorage.setItem(CHAT_RATE_LIMIT_KEY, JSON.stringify(nextTimestamps));
+    } catch (error) {
+      console.error('Unable to persist chat rate-limit history:', error);
+    }
 
     const nextMessages = [...messages, { role: 'user' as const, content }];
     const requestMessages = nextMessages.slice(-8);
@@ -132,6 +177,7 @@ export default function ChatBotWidget({ lang }: ChatBotWidgetProps) {
               </p>
             ))}
             {isSending && <p className="text-xs text-stone-400">{text.waiting}</p>}
+            {isRateLimited && <p role="status" className="text-xs leading-relaxed text-amber-300">{text.rateLimit}</p>}
             {hasError && <p role="alert" className="text-xs leading-relaxed text-amber-300">{text.error}</p>}
             <div ref={endOfMessagesRef} />
           </div>
@@ -141,13 +187,14 @@ export default function ChatBotWidget({ lang }: ChatBotWidgetProps) {
               value={input}
               onChange={(event) => setInput(event.target.value)}
               maxLength={1000}
-              placeholder={text.placeholder}
+              disabled={isRateLimited}
+              placeholder={isRateLimited ? text.rateLimit : text.placeholder}
               aria-label={text.placeholder}
               className="min-w-0 flex-1 rounded-full border border-white/10 bg-black/30 px-4 py-2.5 text-sm text-white placeholder:text-stone-500 focus:border-[#C85228] focus:outline-none"
             />
             <button
               type="submit"
-              disabled={isSending || !input.trim()}
+              disabled={isSending || isRateLimited || !input.trim()}
               aria-label={text.send}
               className="rounded-full bg-[#C85228] p-3 text-white transition-colors hover:bg-[#d95d31] disabled:cursor-not-allowed disabled:opacity-50"
             >
