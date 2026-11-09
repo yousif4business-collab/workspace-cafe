@@ -1053,11 +1053,11 @@ const OfficeSolutionsPage = ({ onBack, lang, setLang }: { onBack: () => void, la
   ];
 
   const galleryImages = [
-    { src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80', label: lang === 'en' ? 'Building Exterior' : 'المبنى من الخارج' },
-    { src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80', label: lang === 'en' ? 'Interior Finish' : 'التشطيب الداخلي' },
-    { src: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80', label: lang === 'en' ? 'Building Identity' : 'هوية المبنى' },
-    { src: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80', label: lang === 'en' ? 'Collaboration Space' : 'مساحة التعاون' },
-    { src: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80', label: lang === 'en' ? 'Premium Workspace' : 'مساحة عمل متميزة' }
+    { src: '/exterior.jpg', label: lang === 'en' ? 'Building Exterior' : 'المبنى من الخارج' },
+    { src: '/interior.jpg', label: lang === 'en' ? 'Interior Finish' : 'التشطيب الداخلي' },
+    { src: '/identity.jpg', label: lang === 'en' ? 'Building Identity' : 'هوية المبنى' },
+    { src: '/collaboration.jpg', label: lang === 'en' ? 'Collaboration Space' : 'مساحة التعاون' },
+    { src: '/workspace.jpg', label: lang === 'en' ? 'Premium Workspace' : 'مساحة عمل متميزة' }
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
