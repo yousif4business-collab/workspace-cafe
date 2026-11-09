@@ -4,7 +4,8 @@ import {
   Coffee, CalendarPlus, MessageCircle, Briefcase, Sparkles,
   MapPin, Phone, ShoppingBag, Plus, Minus, X, Flame,
   ArrowLeft, ArrowUpRight, ChevronLeft, CheckCircle2,
-  Building2, Globe, Layout, Wrench, Users, Wifi, Zap, Bath, ShieldCheck, Search
+  Building2, Globe, Layout, Wrench, Users, Wifi, Zap, Bath, ShieldCheck, Search,
+  Banknote, Lightbulb
 } from 'lucide-react';
 
 // ─────────────────────────────────────────────────────────────
@@ -325,24 +326,33 @@ const InsideMeetingRoomFrame = ({ onBookClick }: { onBookClick: () => void }) =>
 // ─────────────────────────────────────────────────────────────
 // PADEL SHOWCASE
 // ─────────────────────────────────────────────────────────────
-const RealPadelRooftopShowcase = ({ onBookClick }: { onBookClick: () => void }) => (
-  <div className="relative rounded-3xl overflow-hidden bg-stone-900 border border-white/10 shadow-2xl group">
-    <div className="absolute top-4 left-4 z-20 flex items-center space-x-2 bg-black/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15">
+const RealPadelRooftopShowcase = ({ onBookClick, lang }: { onBookClick: () => void; lang: Language }) => (
+  <div dir={lang === 'ar' ? 'rtl' : 'ltr'} className="relative rounded-3xl overflow-hidden bg-stone-900 border border-white/10 shadow-2xl group">
+    <div className={`absolute top-4 ${lang === 'ar' ? 'right-4' : 'left-4'} z-20 flex items-center gap-2 bg-black/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15`}>
       <span className="w-2 h-2 rounded-full bg-[#C85228] animate-pulse" />
-      <span className="text-[10px] font-bold tracking-widest uppercase text-stone-200">OPEN-AIR ROOFTOP TURF • BAGHDAD SKYLINE</span>
+      <span className="text-[10px] font-bold tracking-widest uppercase text-stone-200">
+        {lang === 'en' ? 'OPEN-AIR ROOFTOP TURF • BAGHDAD SKYLINE' : 'ملعب السطح المفتوح • أفق بغداد'}
+      </span>
     </div>
     <div className="relative h-[420px] md:h-[500px] w-full overflow-hidden">
       <img src={encodeURI(IMAGES.padelRooftop)} alt="WorkSpace Cafe Rooftop Padel Baghdad" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-      <div className="absolute bottom-4 inset-x-4 md:inset-x-8 z-20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-black/60 backdrop-blur-md p-4 rounded-2xl border border-white/10">
-        <div className="flex flex-wrap items-center gap-2 text-xs text-stone-200">
-          <span>🎾 <strong>60,000 IQD</strong> / hour</span>
-          <span className="text-stone-500">•</span>
-          <span>🌙 Night LED Lighting</span>
-          <span className="text-stone-500">•</span>
-          <span>☕ Court-side Delivery</span>
+      <div className="absolute bottom-4 inset-x-4 md:inset-x-8 z-20 flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-black/70 backdrop-blur-xl p-4 md:p-5 rounded-2xl border border-white/10">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+          <div className="flex items-center gap-2 text-xs text-stone-200">
+            <span className="p-1.5 rounded-lg bg-[#C85228]/20 text-[#C85228]"><Banknote size={14} /></span>
+            <span>{lang === 'en' ? <><strong>60,000 IQD</strong> / hour</> : <><strong>60,000 د.ع</strong> / ساعة</>}</span>
+          </div>
+          <div className="flex items-center gap-2 text-xs text-stone-200">
+            <span className="p-1.5 rounded-lg bg-[#C85228]/20 text-[#C85228]"><Lightbulb size={14} /></span>
+            <span>{lang === 'en' ? 'Night LED Lighting' : 'إضاءة ليلية'}</span>
+          </div>
+          <div className="flex items-center gap-2 text-xs text-stone-200">
+            <span className="p-1.5 rounded-lg bg-[#C85228]/20 text-[#C85228]"><Coffee size={14} /></span>
+            <span>{lang === 'en' ? 'Court-side Delivery' : 'توصيل إلى الملعب'}</span>
+          </div>
         </div>
-        <button onClick={onBookClick} className="px-5 py-2 rounded-full bg-[#C85228] hover:bg-[#d95d31] text-white font-semibold text-xs tracking-wider uppercase transition-all shadow-lg whitespace-nowrap">
-          Book Court Slot
+        <button onClick={onBookClick} className="w-full lg:w-auto px-6 py-2.5 rounded-full bg-[#C85228] hover:bg-[#d95d31] text-white font-bold text-[11px] tracking-wider uppercase transition-all shadow-lg whitespace-nowrap text-center">
+          {lang === 'en' ? 'Book Court Slot' : 'احجز الملعب الآن'}
         </button>
       </div>
     </div>
@@ -784,7 +794,7 @@ const ReservationPage = ({ type, onBack, onNavigateShop, lang, setLang }: Reserv
             </div>
             <p className="text-xs md:text-sm text-stone-300 font-light leading-relaxed">{isPadel ? "Baghdad's open-sky rooftop court with Mondo Supercourt XN turf, night illumination, and direct cafe drink delivery." : 'Modern executive meeting room designed for seamless pitches, boardroom discussions, and private business presentations.'}</p>
           </div>
-          {isPadel ? <RealPadelRooftopShowcase onBookClick={scrollToForm} /> : <InsideMeetingRoomFrame onBookClick={scrollToForm} />}
+          {isPadel ? <RealPadelRooftopShowcase onBookClick={scrollToForm} lang={lang} /> : <InsideMeetingRoomFrame onBookClick={scrollToForm} />}
           {isPadel && (
             <div className="grid grid-cols-2 gap-4 mt-6">
               <div className="rounded-2xl overflow-hidden border border-white/10 shadow-xl group relative">
