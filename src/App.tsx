@@ -401,15 +401,19 @@ type PadelProduct = {
   price: number;
   image: string;
   desc: string;
+  brand: string;
+  specs: string;
 };
 
 const PADEL_PRODUCTS: PadelProduct[] = [
-  { id: 'p1', name: 'Head Speed Pro Racket', category: 'Rackets', price: 180000, image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80', desc: 'Precision and power. The official racket of the Padel Club Baghdad pros.' },
-  { id: 'p2', name: 'Babolat Technical Viper', category: 'Rackets', price: 210000, image: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=800&q=80', desc: 'Diamond shape for maximum smash power. Lightweight carbon fiber.' },
-  { id: 'p3', name: 'Bullpadel Pro Padel Balls', category: 'Balls', price: 15000, image: 'https://images.unsplash.com/photo-1611251135345-18c56206b863?auto=format&fit=crop&w=800&q=80', desc: 'Tube of 3 high-altitude pressure balls for tournament play.' },
-  { id: 'p4', name: 'Wilson Padel Bag', category: 'Accessories', price: 85000, image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80', desc: 'Thermal insulated racket compartment and shoe pocket.' },
-  { id: 'p5', name: 'Overgrip Pack (3x)', category: 'Accessories', price: 12000, image: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=800&q=80', desc: 'Tacky feel for maximum control and sweat absorption.' },
-  { id: 'p6', name: 'WorkSpace Padel Tee', category: 'Apparel', price: 35000, image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80', desc: 'Breathable performance fabric with the Padel Club Baghdad logo.' },
+  { id: 'p1', name: 'Head Speed Pro Racket', category: 'Rackets', price: 180000, image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80', desc: 'Precision and power. The official racket of the Padel Club Baghdad pros.', brand: 'HEAD', specs: 'Weight: 360g | Shape: Teardrop' },
+  { id: 'p2', name: 'Babolat Technical Viper', category: 'Rackets', price: 210000, image: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=800&q=80', desc: 'Diamond shape for maximum smash power. Lightweight carbon fiber.', brand: 'BABOLAT', specs: 'Weight: 365g | Shape: Diamond' },
+  { id: 'p3', name: 'Bullpadel Pro Padel Balls', category: 'Balls', price: 15000, image: 'https://images.unsplash.com/photo-1611251135345-18c56206b863?auto=format&fit=crop&w=800&q=80', desc: 'Tube of 3 high-altitude pressure balls for tournament play.', brand: 'BULLPADEL', specs: 'Speed: Fast | Pack: 3 Balls' },
+  { id: 'p4', name: 'Wilson Padel Bag', category: 'Accessories', price: 85000, image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80', desc: 'Thermal insulated racket compartment and shoe pocket.', brand: 'WILSON', specs: 'Capacity: 2 Rackets | Color: Black' },
+  { id: 'p5', name: 'Overgrip Pack (3x)', category: 'Accessories', price: 12000, image: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=800&q=80', desc: 'Tacky feel for maximum control and sweat absorption.', brand: 'HEAD', specs: 'Pack: 3 Grips | Color: White' },
+  { id: 'p6', name: 'WorkSpace Padel Tee', category: 'Apparel', price: 35000, image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80', desc: 'Breathable performance fabric with the Padel Club Baghdad logo.', brand: 'WORKSPACE', specs: 'Sizes: S, M, L, XL | 100% Polyester' },
+  { id: 'p7', name: 'Adidas Metalbone Racket', category: 'Rackets', price: 230000, image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80', desc: 'The weapon of choice for professional players seeking ultimate power.', brand: 'ADIDAS', specs: 'Weight: 370g | Shape: Diamond' },
+  { id: 'p8', name: 'Nox Luxury Padel Cap', category: 'Apparel', price: 25000, image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=800&q=80', desc: 'Stay cool on the court with this moisture-wicking cap.', brand: 'NOX', specs: 'Adjustable | One Size' },
 ];
 
 // ─────────────────────────────────────────────────────────────
@@ -1369,71 +1373,140 @@ const FloatingWhatsApp = () => (
 );
 
 const PadelShopPage = ({ onBack, onNavigateReservation, lang }: { onBack: () => void; onNavigateReservation: () => void; lang: Language }) => {
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedProduct, setSelectedProduct] = useState<PadelProduct | null>(null);
+  const categories = ['All', 'Rackets', 'Balls', 'Accessories', 'Apparel'];
+  const filteredProducts = selectedCategory === 'All'
+    ? PADEL_PRODUCTS
+    : PADEL_PRODUCTS.filter((product) => product.category === selectedCategory);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    if (!selectedProduct) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setSelectedProduct(null);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [selectedProduct]);
+
   return (
     <div className="min-h-screen bg-[#12100F] text-[#FAF7F2] flex flex-col">
-    <header className="sticky top-0 z-40 bg-[#12100F]/95 backdrop-blur-xl border-b border-white/10 px-4 md:px-12 py-4 flex items-center justify-between">
-      <div className="flex items-center space-x-4">
-        <button onClick={onBack} aria-label="Back to home" className="p-2.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-stone-900 transition-colors">
-          <ArrowLeft size={16} />
-        </button>
-        <div className="flex items-center space-x-3">
-          <PadelClubLogo className="w-10 h-10" />
-          <div className="flex flex-col">
-            <span className="font-serif font-black text-lg text-white leading-none">Padel Shop<span className="text-[#C85228]">.</span></span>
-            <span className="text-[9px] uppercase tracking-widest text-[#E59866] font-semibold mt-1">Official Gear</span>
+      <header className="sticky top-0 z-40 bg-[#12100F]/95 backdrop-blur-xl border-b border-white/10 px-4 md:px-12 py-4 flex items-center justify-between">
+        <div className="flex items-center space-x-4">
+          <button onClick={onBack} aria-label="Back to home" className="p-2.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-stone-900 transition-colors">
+            <ArrowLeft size={16} />
+          </button>
+          <div className="flex items-center space-x-3">
+            <PadelClubLogo className="w-10 h-10" />
+            <div className="flex flex-col">
+              <span className="font-serif font-black text-lg text-white leading-none">Padel Shop<span className="text-[#C85228]">.</span></span>
+              <span className="text-[9px] uppercase tracking-widest text-[#E59866] font-semibold mt-1">Official Gear</span>
+            </div>
           </div>
         </div>
-      </div>
-      <button onClick={onNavigateReservation} className="px-4 py-2 rounded-full bg-[#C85228] hover:bg-[#d95d31] text-white text-xs font-bold tracking-wider transition-all shadow-lg flex items-center space-x-2">
-        <CalendarPlus size={15} />
-        <span className="hidden sm:inline">{lang === 'en' ? 'Book Court' : 'احجز الملعب'}</span>
-      </button>
-    </header>
+        <button onClick={onNavigateReservation} className="px-4 py-2 rounded-full bg-[#C85228] hover:bg-[#d95d31] text-white text-xs font-bold tracking-wider transition-all shadow-lg flex items-center space-x-2">
+          <CalendarPlus size={15} />
+          <span className="hidden sm:inline">{lang === 'en' ? 'Book Court' : 'احجز الملعب'}</span>
+        </button>
+      </header>
 
-    <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-12 py-12">
-      <div className="text-center max-w-2xl mx-auto mb-12">
-        <h1 className="text-4xl md:text-5xl font-serif font-black text-white mb-4">{lang === 'en' ? 'Elevate Your Game.' : 'ارتقِ بمستوى لعبك.'}</h1>
-        <p className="text-sm text-stone-400">
-          {lang === 'en'
-            ? 'Premium rackets, balls, and apparel available for purchase at the WorkSpace Pro Shop.'
-            : 'مضارب وكرات وملابس رياضية مميزة متوفرة للشراء من متجر وورك سبيس.'}
-        </p>
+      <div className="relative h-64 md:h-80 w-full overflow-hidden flex items-center justify-center">
+        <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1200&q=80" alt="" className="absolute inset-0 w-full h-full object-cover brightness-[0.3]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60" />
+        <div className="relative z-10 text-center px-4">
+          <h1 className="text-4xl md:text-6xl font-serif font-black text-white mb-2">{lang === 'en' ? 'Elevate Your Game.' : 'ارتقِ بمستوى لعبك.'}</h1>
+          <p className="text-sm md:text-base text-stone-300">
+            {lang === 'en' ? 'Premium rackets, balls, and apparel from the WorkSpace Pro Shop.' : 'مضارب وكرات وملابس رياضية مميزة من متجر وورك سبيس.'}
+          </p>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {PADEL_PRODUCTS.map((item) => (
-          <div key={item.id} className="group bg-[#1A1817] rounded-[2rem] overflow-hidden border border-white/5 hover:border-[#C85228]/40 transition-all duration-300 shadow-xl flex flex-col justify-between">
-            <div className="relative h-64 w-full overflow-hidden bg-stone-950">
-              <img src={item.image} alt={item.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1817] via-transparent to-black/30" />
-              <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-black/60 backdrop-blur-md text-white border border-white/10">{item.category}</div>
-            </div>
-            <div className="p-6 flex-1 flex flex-col justify-between">
-              <div>
-                <h3 className="font-serif font-bold text-xl text-white mb-2">{item.name}</h3>
-                <p className="text-xs text-stone-400 mb-4">{item.desc}</p>
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-12 py-8">
+        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-6">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              aria-pressed={selectedCategory === category}
+              className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all ${selectedCategory === category ? 'bg-white text-stone-900 shadow-lg' : 'bg-white/5 text-stone-400 hover:text-white border border-white/10'}`}
+            >
+              {category === 'All' && lang === 'ar' ? 'الكل' : category}
+            </button>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {filteredProducts.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => setSelectedProduct(item)}
+              aria-label={`View ${item.name} details`}
+              className="group text-left bg-[#1A1817] rounded-[2rem] overflow-hidden border border-white/5 hover:border-[#C85228]/40 transition-all duration-300 shadow-xl flex flex-col justify-between cursor-pointer"
+            >
+              <div className="relative h-56 w-full overflow-hidden bg-stone-950">
+                <img src={item.image} alt={item.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1817] via-transparent to-black/30" />
+                <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-black/60 backdrop-blur-md text-white border border-white/10">{item.category}</div>
               </div>
-              <div className="flex items-center justify-between gap-3 pt-4 border-t border-white/5">
-                <span className="font-mono font-bold text-lg text-[#E59866] whitespace-nowrap">{item.price.toLocaleString()} IQD</span>
+              <div className="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div className="text-[10px] font-bold text-stone-500 mb-1">{item.brand}</div>
+                  <h2 className="font-serif font-bold text-lg text-white mb-1 line-clamp-1">{item.name}</h2>
+                  <p className="text-xs text-stone-400 line-clamp-2">{item.desc}</p>
+                </div>
+                <div className="pt-4 mt-4 border-t border-white/5 flex items-center justify-between gap-2">
+                  <span className="font-mono font-bold text-sm text-[#E59866]">{item.price.toLocaleString()} IQD</span>
+                  <span className="text-xs font-bold text-white group-hover:text-[#C85228] transition-colors">{lang === 'en' ? 'View Gear' : 'عرض المنتج'} <span aria-hidden="true">→</span></span>
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </main>
+
+      {selectedProduct && (
+        <div role="presentation" className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4" onClick={() => setSelectedProduct(null)}>
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-label={selectedProduct.name}
+            className="bg-[#1A1817] rounded-3xl border border-white/15 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col md:flex-row relative"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button onClick={() => setSelectedProduct(null)} aria-label="Close product details" className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/60 text-white hover:bg-white hover:text-stone-900 transition-colors">
+              <X size={16} />
+            </button>
+            <div className="md:w-1/2 h-56 md:h-auto md:min-h-[24rem] relative shrink-0">
+              <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-cover" />
+            </div>
+            <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-between">
+              <div>
+                <div className="text-[10px] font-bold text-[#C85228] tracking-widest uppercase mb-1">{selectedProduct.brand}</div>
+                <h2 className="font-serif font-black text-2xl text-white mb-2">{selectedProduct.name}</h2>
+                <p className="text-sm text-stone-300 mb-4">{selectedProduct.desc}</p>
+                <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs text-stone-400 font-mono mb-6">{selectedProduct.specs}</div>
+              </div>
+              <div>
+                <div className="text-2xl font-mono font-bold text-[#E59866] mb-4">{selectedProduct.price.toLocaleString()} IQD</div>
                 <a
-                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`I want to order: ${item.name} (${item.price.toLocaleString()} IQD)`)}`}
+                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`I want to order: ${selectedProduct.name} (${selectedProduct.price.toLocaleString()} IQD)`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-stone-950 font-bold text-xs transition-all flex items-center space-x-1"
+                  className="w-full py-4 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-stone-950 font-bold text-sm tracking-wider uppercase transition-all shadow-xl flex items-center justify-center gap-2"
                 >
-                  <MessageCircle size={14} />
-                  <span>{lang === 'en' ? 'ORDER' : 'اطلب'}</span>
+                  <MessageCircle size={18} />
+                  <span>{lang === 'en' ? 'Order via WhatsApp' : 'اطلب عبر واتساب'}</span>
                 </a>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </main>
+          </section>
+        </div>
+      )}
     </div>
   );
 };
