@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
+import ChatBotWidget from './ChatBotWidget';
 import {
   Coffee, CalendarPlus, MessageCircle, Briefcase, Sparkles,
   MapPin, Phone, ShoppingBag, Plus, Minus, X, Flame,
@@ -1379,6 +1380,7 @@ export default function App() {
       {currentPage === 'office' && <OfficeSolutionsPage onBack={() => setCurrentPage('home')} lang={lang} setLang={setLang} />}
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cart={cart} onUpdateQuantity={handleUpdateQuantity} onBrowse={() => setCurrentPage('menu')} />
       <FloatingWhatsApp />
+      <ChatBotWidget lang={lang} />
     </div>
   );
 }
