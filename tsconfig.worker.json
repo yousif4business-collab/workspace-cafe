@@ -11,6 +11,6 @@
     "noEmit": true,
     "verbatimModuleSyntax": true
   },
-  "files": ["worker-configuration.d.ts"],
-  "include": ["functions/**/*.ts"]
+  "files": ["worker-configuration.d.ts", "worker-pages-configuration.d.ts"],
+  "include": ["functions/**/*.ts", "workers/**/*.ts"]
 }

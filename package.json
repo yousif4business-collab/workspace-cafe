@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:pages": "npm run build && wrangler pages dev dist",
+    "dev:pages": "npm run build && wrangler pages dev --config wrangler.jsonc --config wrangler.chat.jsonc",
+    "deploy:pages": "npm run build && wrangler deploy --config wrangler.chat.jsonc && wrangler pages deploy dist --project-name workspace-cafe --branch main",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"
