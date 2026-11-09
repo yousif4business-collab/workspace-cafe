@@ -394,6 +394,24 @@ const MENU_ITEMS: MenuItem[] = [
   { id: 'bake-3', category: 'bakery', name: 'Fresh Butter Croissant', arabic: 'كرواسون زبدة فرنسي', price: 4000, isIced: false, isFood: true, desc: 'Flaky 100% French butter layers baked golden every morning at 8:30 AM.', image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80', tags: ['Baked Daily', 'French Butter'] },
 ];
 
+type PadelProduct = {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+  image: string;
+  desc: string;
+};
+
+const PADEL_PRODUCTS: PadelProduct[] = [
+  { id: 'p1', name: 'Head Speed Pro Racket', category: 'Rackets', price: 180000, image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80', desc: 'Precision and power. The official racket of the Padel Club Baghdad pros.' },
+  { id: 'p2', name: 'Babolat Technical Viper', category: 'Rackets', price: 210000, image: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=800&q=80', desc: 'Diamond shape for maximum smash power. Lightweight carbon fiber.' },
+  { id: 'p3', name: 'Bullpadel Pro Padel Balls', category: 'Balls', price: 15000, image: 'https://images.unsplash.com/photo-1611251135345-18c56206b863?auto=format&fit=crop&w=800&q=80', desc: 'Tube of 3 high-altitude pressure balls for tournament play.' },
+  { id: 'p4', name: 'Wilson Padel Bag', category: 'Accessories', price: 85000, image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80', desc: 'Thermal insulated racket compartment and shoe pocket.' },
+  { id: 'p5', name: 'Overgrip Pack (3x)', category: 'Accessories', price: 12000, image: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=800&q=80', desc: 'Tacky feel for maximum control and sweat absorption.' },
+  { id: 'p6', name: 'WorkSpace Padel Tee', category: 'Apparel', price: 35000, image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80', desc: 'Breathable performance fabric with the Padel Club Baghdad logo.' },
+];
+
 // ─────────────────────────────────────────────────────────────
 // GATEWAY (HOME)
 // ─────────────────────────────────────────────────────────────
@@ -661,9 +679,10 @@ const MenuPage = ({ onBack, onNavigateReservation, cart, onAddToCart, onOpenCart
 type ReservationPageProps = {
   type: 'padel' | 'meeting';
   onBack: () => void;
+  onNavigateShop: () => void;
 } & LanguageProps;
 
-const ReservationPage = ({ type, onBack, lang, setLang }: ReservationPageProps) => {
+const ReservationPage = ({ type, onBack, onNavigateShop, lang, setLang }: ReservationPageProps) => {
   const t = TRANSLATIONS[lang];
   const isPadel = type === 'padel';
   const days = useMemo(() => getNextDays(7), []);
@@ -748,7 +767,15 @@ const ReservationPage = ({ type, onBack, lang, setLang }: ReservationPageProps) 
         <div className="lg:col-span-7 flex flex-col space-y-8">
           <div>
             <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#C85228]">{isPadel ? 'OPEN-AIR ROOFTOP TURF' : '6TH FLOOR EXECUTIVE SUITE'}</span>
-            <h1 className="text-3xl md:text-5xl font-serif font-black text-white mt-1 mb-2">{isPadel ? 'Book Your Padel Court' : 'Reserve 6th Floor Boardroom'}</h1>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
+              <h1 className="text-3xl md:text-5xl font-serif font-black text-white mt-1">{isPadel ? 'Book Your Padel Court' : 'Reserve 6th Floor Boardroom'}</h1>
+              {isPadel && (
+                <button onClick={onNavigateShop} className="inline-flex items-center justify-center gap-2 self-start px-4 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-white transition-colors">
+                  <ShoppingBag size={15} />
+                  <span>{lang === 'en' ? 'Shop Padel Gear' : 'تسوق معدات البادل'}</span>
+                </button>
+              )}
+            </div>
             <p className="text-xs md:text-sm text-stone-300 font-light leading-relaxed">{isPadel ? "Baghdad's open-sky rooftop court with Mondo Supercourt XN turf, night illumination, and direct cafe drink delivery." : 'Modern executive meeting room designed for seamless pitches, boardroom discussions, and private business presentations.'}</p>
           </div>
           {isPadel ? <RealPadelRooftopShowcase onBookClick={scrollToForm} /> : <InsideMeetingRoomFrame onBookClick={scrollToForm} />}
@@ -1341,10 +1368,80 @@ const FloatingWhatsApp = () => (
   </a>
 );
 
+const PadelShopPage = ({ onBack, onNavigateReservation, lang }: { onBack: () => void; onNavigateReservation: () => void; lang: Language }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-[#12100F] text-[#FAF7F2] flex flex-col">
+    <header className="sticky top-0 z-40 bg-[#12100F]/95 backdrop-blur-xl border-b border-white/10 px-4 md:px-12 py-4 flex items-center justify-between">
+      <div className="flex items-center space-x-4">
+        <button onClick={onBack} aria-label="Back to home" className="p-2.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-stone-900 transition-colors">
+          <ArrowLeft size={16} />
+        </button>
+        <div className="flex items-center space-x-3">
+          <PadelClubLogo className="w-10 h-10" />
+          <div className="flex flex-col">
+            <span className="font-serif font-black text-lg text-white leading-none">Padel Shop<span className="text-[#C85228]">.</span></span>
+            <span className="text-[9px] uppercase tracking-widest text-[#E59866] font-semibold mt-1">Official Gear</span>
+          </div>
+        </div>
+      </div>
+      <button onClick={onNavigateReservation} className="px-4 py-2 rounded-full bg-[#C85228] hover:bg-[#d95d31] text-white text-xs font-bold tracking-wider transition-all shadow-lg flex items-center space-x-2">
+        <CalendarPlus size={15} />
+        <span className="hidden sm:inline">{lang === 'en' ? 'Book Court' : 'احجز الملعب'}</span>
+      </button>
+    </header>
+
+    <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-12 py-12">
+      <div className="text-center max-w-2xl mx-auto mb-12">
+        <h1 className="text-4xl md:text-5xl font-serif font-black text-white mb-4">{lang === 'en' ? 'Elevate Your Game.' : 'ارتقِ بمستوى لعبك.'}</h1>
+        <p className="text-sm text-stone-400">
+          {lang === 'en'
+            ? 'Premium rackets, balls, and apparel available for purchase at the WorkSpace Pro Shop.'
+            : 'مضارب وكرات وملابس رياضية مميزة متوفرة للشراء من متجر وورك سبيس.'}
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {PADEL_PRODUCTS.map((item) => (
+          <div key={item.id} className="group bg-[#1A1817] rounded-[2rem] overflow-hidden border border-white/5 hover:border-[#C85228]/40 transition-all duration-300 shadow-xl flex flex-col justify-between">
+            <div className="relative h-64 w-full overflow-hidden bg-stone-950">
+              <img src={item.image} alt={item.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1817] via-transparent to-black/30" />
+              <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-black/60 backdrop-blur-md text-white border border-white/10">{item.category}</div>
+            </div>
+            <div className="p-6 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 className="font-serif font-bold text-xl text-white mb-2">{item.name}</h3>
+                <p className="text-xs text-stone-400 mb-4">{item.desc}</p>
+              </div>
+              <div className="flex items-center justify-between gap-3 pt-4 border-t border-white/5">
+                <span className="font-mono font-bold text-lg text-[#E59866] whitespace-nowrap">{item.price.toLocaleString()} IQD</span>
+                <a
+                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`I want to order: ${item.name} (${item.price.toLocaleString()} IQD)`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-stone-950 font-bold text-xs transition-all flex items-center space-x-1"
+                >
+                  <MessageCircle size={14} />
+                  <span>{lang === 'en' ? 'ORDER' : 'اطلب'}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </main>
+    </div>
+  );
+};
+
 // ─────────────────────────────────────────────────────────────
 // APP ROOT
 // ─────────────────────────────────────────────────────────────
-type Page = 'home' | 'menu' | 'padel' | 'meeting' | 'office';
+type Page = 'home' | 'menu' | 'padel' | 'meeting' | 'office' | 'padel-shop';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
@@ -1387,8 +1484,9 @@ export default function App() {
       <GlobalStyles />
       {currentPage === 'home' && <GatewayPage onSelectWorld={(id) => setCurrentPage(id)} lang={lang} setLang={setLang} />}
       {currentPage === 'menu' && <MenuPage onBack={() => setCurrentPage('home')} onNavigateReservation={(type) => setCurrentPage(type)} cart={cart} onAddToCart={handleAddToCart} onOpenCart={() => setIsCartOpen(true)} lang={lang} setLang={setLang} />}
-      {(currentPage === 'padel' || currentPage === 'meeting') && <ReservationPage type={currentPage} onBack={() => setCurrentPage('home')} lang={lang} setLang={setLang} />}
+      {(currentPage === 'padel' || currentPage === 'meeting') && <ReservationPage type={currentPage} onBack={() => setCurrentPage('home')} onNavigateShop={() => setCurrentPage('padel-shop')} lang={lang} setLang={setLang} />}
       {currentPage === 'office' && <OfficeSolutionsPage onBack={() => setCurrentPage('home')} lang={lang} setLang={setLang} />}
+      {currentPage === 'padel-shop' && <PadelShopPage onBack={() => setCurrentPage('home')} onNavigateReservation={() => setCurrentPage('padel')} lang={lang} />}
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cart={cart} onUpdateQuantity={handleUpdateQuantity} onBrowse={() => setCurrentPage('menu')} />
       <FloatingWhatsApp />
       <ChatBotWidget lang={lang} />
