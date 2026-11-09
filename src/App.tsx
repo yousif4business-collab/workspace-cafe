@@ -418,20 +418,20 @@ const GatewayPage = ({ onSelectWorld, lang, setLang }: { onSelectWorld: (id: Wor
 
   return (
     <div className="relative w-full min-h-screen lg:h-screen lg:overflow-hidden bg-[#12100F] text-white flex flex-col">
-      <header className="absolute top-0 left-0 right-0 z-40 px-4 md:px-12 py-3 md:py-5 flex items-center justify-between pointer-events-none">
+      <header className="absolute top-0 left-0 right-0 z-50 px-4 md:px-12 py-4 flex items-center justify-between pointer-events-none">
         <div className="pointer-events-auto"><WorkSpaceBrandHeader /></div>
-        <div className="pointer-events-auto flex items-center gap-2">
-          <button onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} className="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold transition-all">
+        <div className="pointer-events-auto flex items-center space-x-3">
+          <button onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} className="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold text-white transition-all">
             {lang === 'en' ? 'العربية' : 'English'}
           </button>
-          <div className="hidden sm:flex items-center space-x-3 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 text-xs">
+          <div className="hidden sm:flex items-center space-x-2 bg-black/60 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 text-xs">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-stone-300 font-medium">{SITE.hours}</span>
           </div>
         </div>
       </header>
 
-      <div className="flex-1 flex flex-col lg:flex-row w-full lg:h-full">
+      <div className="flex-1 flex flex-col lg:flex-row w-full lg:h-[calc(100vh-80px)] pt-20 lg:pt-0">
         {worlds.map((world) => {
           const isHovered = hoveredPanel === world.id;
           const isAnyHovered = hoveredPanel !== null;
@@ -446,7 +446,7 @@ const GatewayPage = ({ onSelectWorld, lang, setLang }: { onSelectWorld: (id: Wor
               role="button"
               tabIndex={0}
               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelectWorld(world.id); } }}
-              className={`relative flex-1 cursor-pointer transition-all duration-700 ease-out overflow-hidden flex flex-col justify-end p-6 md:p-12 pb-24 md:pb-28 lg:pb-24 h-[50vh] sm:h-[60vh] lg:min-h-0 border-b lg:border-b-0 lg:border-r border-white/10 ${isHovered ? 'lg:flex-[1.5]' : isDimmed ? 'lg:flex-[0.75]' : 'lg:flex-1'}`}
+              className={`relative flex-1 cursor-pointer transition-all duration-700 ease-out overflow-hidden flex flex-col justify-end p-6 md:p-12 pb-28 lg:pb-24 h-[50vh] sm:h-[60vh] lg:h-full lg:min-h-0 border-b lg:border-b-0 lg:border-r border-white/10 ${isHovered ? 'lg:flex-[1.5]' : isDimmed ? 'lg:flex-[0.75]' : 'lg:flex-1'}`}
             >
               <div className="absolute inset-0 z-0 overflow-hidden">
                 <img src={world.image} alt={world.title} className={`w-full h-full object-cover transition-all duration-700 ease-out ${isHovered ? 'scale-105 filter grayscale-0 brightness-90' : isDimmed ? 'scale-100 filter grayscale brightness-50 opacity-40' : 'scale-100 filter grayscale-[40%] brightness-75'}`} />
@@ -475,7 +475,7 @@ const GatewayPage = ({ onSelectWorld, lang, setLang }: { onSelectWorld: (id: Wor
           );
         })}
       </div>
-      <footer className="relative lg:absolute bottom-0 inset-x-0 z-30 px-4 md:px-12 py-3 bg-black/80 backdrop-blur-md border-t border-white/10 flex flex-wrap items-center justify-between text-[11px] text-stone-400">
+      <footer className="relative lg:absolute bottom-0 inset-x-0 z-40 px-4 md:px-12 py-3 bg-black/80 backdrop-blur-md border-t border-white/10 flex flex-wrap items-center justify-between text-[11px] text-stone-400">
         <div className="flex items-center space-x-4">
           <span className="flex items-center space-x-1"><MapPin size={12} className="text-[#C85228]" /><span>{SITE.location}</span></span>
           <span className="hidden sm:inline text-stone-600">•</span>
