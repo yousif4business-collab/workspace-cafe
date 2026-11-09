@@ -475,28 +475,28 @@ const GatewayPage = ({ onSelectWorld, lang, setLang }: { onSelectWorld: (id: Wor
               <div className="absolute top-6 right-6 md:top-10 md:right-10 z-10 pointer-events-none">
                 <span className={`font-serif text-5xl md:text-7xl font-black transition-opacity duration-500 ${isHovered ? 'text-white/30' : 'text-white/10'}`}>{world.code}</span>
               </div>
-              <div className="relative z-20 flex flex-col max-w-lg pb-4">
-                <div className="flex items-center space-x-2 mb-3">
-                  <span className="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-white/10 backdrop-blur-md border border-white/20 text-white animate-float">
+              <div className="relative z-20 mt-auto flex flex-col max-w-lg pb-8">
+                <div className="flex items-center space-x-2 mb-4">
+                  <span className="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-black/60 backdrop-blur-md border border-white/20 text-white animate-float shadow-lg">
                     {world.badge}
                   </span>
                 </div>
 
-                <div className="mb-4">
-                  <div className="text-xs tracking-[0.25em] uppercase text-[#E59866] font-bold mb-1.5">
+                <div className="mb-5">
+                  <div className="text-[10px] md:text-xs tracking-[0.25em] uppercase text-[#E59866] font-bold mb-2">
                     {world.tagline}
                   </div>
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-black tracking-tight text-white leading-[1.1]">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-black tracking-tight text-white leading-[1.05] drop-shadow-2xl">
                     {world.title}
                   </h2>
                 </div>
 
-                <p className={`text-xs md:text-sm text-stone-300 font-light leading-relaxed line-clamp-2 transition-all duration-500 mb-6 ${isHovered ? 'opacity-100 max-h-20' : 'opacity-80 max-h-12'}`}>
+                <p className={`text-xs md:text-sm text-stone-300 font-light leading-relaxed line-clamp-2 transition-all duration-500 mb-8 ${isHovered ? 'opacity-100 max-h-20' : 'opacity-80 max-h-12'}`}>
                   {world.desc}
                 </p>
 
                 <div>
-                  <span className={`inline-flex px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase border transition-all duration-300 items-center space-x-2 ${isHovered ? 'bg-white text-stone-900 border-white shadow-xl translate-x-1' : 'bg-black/40 text-white border-white/40 backdrop-blur-sm'}`}>
+                  <span className={`inline-flex px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase border transition-all duration-300 items-center space-x-2 shadow-xl ${isHovered ? 'bg-white text-stone-900 border-white translate-x-1' : 'bg-black/60 text-white border-white/40 backdrop-blur-md'}`}>
                     <span>{world.cta}</span><ArrowUpRight size={14} />
                   </span>
                 </div>
@@ -1360,7 +1360,7 @@ const FloatingWhatsApp = () => (
     href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello WorkSpace Baghdad! I would like to inquire about your services.')}`}
     target="_blank"
     rel="noopener noreferrer"
-    className="fixed bottom-6 right-6 z-[100] bg-[#25D366] hover:bg-[#20ba5a] text-white p-4 rounded-full shadow-2xl transition-all hover:scale-110 flex items-center justify-center group"
+    className="shrink-0 bg-[#25D366] hover:bg-[#20ba5a] text-white p-4 rounded-full shadow-2xl transition-all hover:scale-110 flex items-center justify-center group"
     aria-label="Chat on WhatsApp"
   >
     <MessageCircle size={24} />
@@ -1488,8 +1488,10 @@ export default function App() {
       {currentPage === 'office' && <OfficeSolutionsPage onBack={() => setCurrentPage('home')} lang={lang} setLang={setLang} />}
       {currentPage === 'padel-shop' && <PadelShopPage onBack={() => setCurrentPage('home')} onNavigateReservation={() => setCurrentPage('padel')} lang={lang} />}
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cart={cart} onUpdateQuantity={handleUpdateQuantity} onBrowse={() => setCurrentPage('menu')} />
-      <FloatingWhatsApp />
-      <ChatBotWidget lang={lang} />
+      <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end space-y-4">
+        <ChatBotWidget lang={lang} />
+        <FloatingWhatsApp />
+      </div>
     </div>
   );
 }
